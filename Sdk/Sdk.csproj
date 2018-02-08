@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!--<TargetFramework>netstandard2.0</TargetFramework>-->
+    <TargetFrameworks>netstandard1.6;netstandard2.0</TargetFrameworks>
+    <!--;net462-->
+    <AssemblyName>GPWebpayNet.Sdk</AssemblyName>
+    <RootNamespace>GPWebpayNet.Sdk</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Description>GPWebpayNet is a helper library for communication with GP webpay(https://www.gpwebpay.cz) payment gateway via HTTP.</Description>
+    <Copyright>© 2017-2018 Marek Polak</Copyright>
+    <PackageProjectUrl>https://github.com/marazt/gpwebpay-net</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/marazt/gpwebpay-net/blob/master/LICENSE</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/marazt/gpwebpay-net</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>payment; gateway, payment gateway; sdk; gpwebpay;</PackageTags>
+    <PackageReleaseNotes>First version</PackageReleaseNotes>
+  </PropertyGroup>
+  <!-- common NuGet package refs that affect all projects -->
+  <!--https://weblog.west-wind.com/posts/2017/Jun/22/MultiTargeting-and-Porting-a-NET-Library-to-NET-Core-20-->
+  <ItemGroup>
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.0-preview1-25914-04" />
+    <PackageReference Include="System.Xml.XmlDocument" Version="4.3.0" />
+  </ItemGroup>
+  <!-- .NET Standard 1.6 references, compilation flags and build options -->
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.6'">
+    <DefineConstants>NETSTANDARD1_6</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6'">
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="1.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="1.1.2" />
+  </ItemGroup>
+  <!-- .NET Standard 2.0 references, compilation flags and build options -->
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
+    <DefineConstants>NETSTANDARD2_0</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="2.0.0" />
+  </ItemGroup>
+</Project>
