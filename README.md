@@ -1,6 +1,6 @@
 # GPWebpayNet
 
-GPWebpayNet is a helper library for communication with [GP webpay](https://www.gpwebpay.cz) payment gateway and providing payments
+GPWebpayNet is a helper library for communication with [GP webpay](http://www.gpwebpay.com) payment gateway and providing payments
 via HTTP. 
 It follows documentation that can be found [here](http://www.gpwebpay.cz/en/Download).
 
