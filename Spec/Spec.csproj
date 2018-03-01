@@ -6,14 +6,28 @@
     <RootNamespace>GPWebpayNet.Sdk.Spec</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="certs\test.pfx" />
-    <None Remove="certs\test_cert.pem" />
+    <None Remove="certs\client.pfx" />
+    <None Remove="certs\client_key.pem" />
+    <None Remove="certs\client_pub.pem" />
+    <None Remove="certs\server.pfx" />
+    <None Remove="certs\server_key.pem" />
+    <None Remove="certs\server_pub.pem" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="certs\test.pfx">
+    <Content Include="certs\client.pfx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="certs\test_cert.pem">
+    <Content Include="certs\client_key.pem" />
+    <Content Include="certs\client_pub.pem">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="certs\server.pfx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="certs\server_key.pem">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="certs\server_pub.pem">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

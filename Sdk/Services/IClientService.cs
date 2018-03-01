@@ -1,6 +1,7 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
 using GPWebpayNet.Sdk.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace GPWebpayNet.Sdk.Services
 {
@@ -25,6 +26,14 @@ namespace GPWebpayNet.Sdk.Services
 
         void ProcessGPWebPayResponse(
             PaymentResponse paymentResponse,
+            string merchantNumber,
+            string certificate,
+            string certificatePassword
+        );
+        
+        PaymentResponse ProcessGPWebPayResponse(
+            IQueryCollection queryArgs,
+            string merchantNumber,
             string publicCert,
             string publicCertPassword
         );

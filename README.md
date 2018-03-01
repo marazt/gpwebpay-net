@@ -10,14 +10,13 @@ digest. Thats all. Another proble is that these examples are quite outdated - to
 has different assemblies for working with ceritficates. 
 
 
-### Versions
-**Version 1.0.0.0 - 2018-02-27** 
-- Initial version
+### Version
+- **Version 1.1.0** - 2018-03-01
 
 
 ### Getting Started/Installing
 ```
-Install-Package GPWebpayNet.Sdk -Version 1.0.0
+Install-Package GPWebpayNet.Sdk -Version 1.1.0
 ```
 
 ### .NET Framework Support
@@ -81,10 +80,10 @@ public string GetRedirectUrl()
         .AddConsole();
 
     const string url = Constants.GPWebpayUrlTest;
-    const string privateCertificateFile = "certs/test.pfx";
+    const string privateCertificateFile = "certs/client.pfx";
     const string privateCertificateFilePassword = "test";
-    const string publicCertificateFile = "certs/test.pfx";
-    const string publicCertificateFilePassword = "test";
+    const string publicCertificateFile = "certs/server_pub.pem";
+    const string publicCertificateFilePassword = null;
     var doc = new XmlDocument();
     doc.AppendChild(doc.CreateElement("Info"));
 
@@ -144,8 +143,9 @@ public void ProcessIncommingGPWPRequest()
         {"DIGEST1", new StringValues("Digest1")},
     });
             
-    const string publicCertificateFile = "certs/test.pfx";
-    const string password = "test";
+    const string merchantNumber = "25236236";
+    const string publicCertificateFile = "certs/server_pub.pem";
+    const string publicCertificateFilePassword = null;
         
             
     var encodingLogger = loggerFactory.CreateLogger<EncodingService>();
@@ -156,7 +156,7 @@ public void ProcessIncommingGPWPRequest()
     // Service will creates PaymentResponse from incomming args and validate response digest with 
     // public certificate provided by GPWP and then check if "PRCODE" and "SRCODE" values have correct or error values
     // ReSharper disable once UnusedVariable
-    var paymentResponse = clientService.ProcessGPWebPayResponse(queryArgs, publicCertificateFile, password);
+    var paymentResponse = clientService.ProcessGPWebPayResponse(queryArgs, merchantNumber, publicCertificateFile, password);
 }
 ```
 
@@ -173,7 +173,7 @@ Pull requests, bug reports, and feature requests are welcome.
 
 ## License
 
-© 2017-2018 Marek Polak. This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+ï¿½ 2017-2018 Marek Polak. This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
 
 ## Acknowledgments

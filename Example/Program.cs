@@ -151,7 +151,8 @@ namespace GPWebpayNet.Example
                 {"DIGEST", new StringValues("Digest")},
                 {"DIGEST1", new StringValues("Digest1")},
             });
-            
+
+            const string merchantNumber = "25236236";
             const string publicCertificateFile = "certs/test.pfx";
             const string password = "test";
         
@@ -161,10 +162,10 @@ namespace GPWebpayNet.Example
             var clientService = new ClientService(new EncodingService(encodingLogger),
                 new PaymentRequestTransformer(), new PaymentResponseTransformer(), clientServiceLogger);
     
-            // Service will creates PaymentResponse from incomming args and validate response digest with 
+            // Service will creates PaymentResponse from incomming args and validate response digest and digest1 with 
             // public certificate provided by GPWP and then check if "PRCODE" and "SRCODE" values have correct or error values
             // ReSharper disable once UnusedVariable
-            var paymentResponse = clientService.ProcessGPWebPayResponse(queryArgs, publicCertificateFile, password);
+            var paymentResponse = clientService.ProcessGPWebPayResponse(queryArgs, merchantNumber, publicCertificateFile, password);
         }
     }
 }

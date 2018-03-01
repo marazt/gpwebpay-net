@@ -23,9 +23,10 @@ namespace GPWebpayNet.Sdk.Spec.Services
         {
             // Arrange
             const string url = "https://example.org";
-            const string privateCertificateFile = "certs/test.pfx";
-            const string publicCertificateFile = "certs/test.pfx";
-            const string password = "test";
+            const string privateCertificateFile = "certs/client.pfx";
+            const string publicCertificateFile = "certs/client_pub.pem";
+            const string privateCertificatePassword = "test";
+            const string publicCertificatePassword = null;
 
             var request = new PaymentRequest
             {
@@ -53,11 +54,13 @@ namespace GPWebpayNet.Sdk.Spec.Services
                 new PaymentRequestTransformer(), new PaymentResponseTransformer(), clientServiceLoggerMock.Object);
 
             const string expected =
-                "https://example.org?MERCHANTNUMBER=MerchantNumber&OPERATION=CREATE_ORDER&ORDERNUMBER=2412&AMOUNT=64.6546&CURRENCY=978&DEPOSITFLAG=1&MERORDERNUM=MerOrderNumber&URL=https%3A%2F%2Fwww.example.org&DESCRIPTION=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetuer%20adipiscing%20elit.&MD=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetuer%20adipiscing%20elit.&PAYMETHOD=Mps&DISABLEPAYMETHOD=Crd&PAYMETHODS=Mcm%2CNotSet&EMAIL=user%40example.org&REFERENCENUMBER=ReferenceNumber&DIGEST=DeDFSo9FlVmh1JvphJM9CZeCq0VpXzBfZbJmEgsNpfu%2FyXPKY%2BNRk6iodmmy3UqulNHsS48BbF3EXeacNOCMwpSW5cIct%2Fk0V4gu1t7E9DgrLWnYeDOZfWEBPjIW01mGxhi2Gw2iOhGfTnQdLummvXr62L0aaFgtxkQHbDO9xcS%2FUNMCjZbDwMPxmvI0iwUdrPhpCmeZ9ZlpTWOvqIm%2FD1Emay55Uny4uysrUx%2BHoBIrpFhQeu3IC8c%2BskJW6cSPvZam%2BMIXsRpO%2FPq3qiUuh7nEs4ovsva1vqPOyukium5wI9nLTAa8ZIeMGfoHWmG1OM7TwRHDD770sRU9DkZB3g%3D%3D";
+                "https://example.org?MERCHANTNUMBER=MerchantNumber&OPERATION=CREATE_ORDER&ORDERNUMBER=2412&AMOUNT=64.6546&CURRENCY=978&DEPOSITFLAG=1&MERORDERNUM=MerOrderNumber&URL=https%3A%2F%2Fwww.example.org&DESCRIPTION=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetuer%20adipiscing%20elit.&MD=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetuer%20adipiscing%20elit.&PAYMETHOD=Mps&DISABLEPAYMETHOD=Crd&PAYMETHODS=Mcm%2CNotSet&EMAIL=user%40example.org&REFERENCENUMBER=ReferenceNumber&DIGEST=fFEV3U6BGeahJ8PppXRVHjDN1dRoVERvLhFeB%2FQm%2Ff6T5FFYCAu4aRUoitW%2Buw5VMLLOoJN%2FW3mwEDvquU7S4gf8iYn%2B%2FxAq8e1VEEbM6OOdGPOOYmAV%2Bbrv7DYZRUN3IX7d0QbrmJ3NnJ4j8IYj1ueD6V%2FOA0SpOAMbdIRAMskUh7STjKJvx34pe3RFNuwArl9xQDdD2gVJ8oaHTTUkphqtL6sSb0q6uDSxNR3v9h3v0L4lU7huGpLwplz2yMOnMe1RzhGrDxBEY9L5XvcgP9gpg0UTym%2FRp%2BHO1LAR404cA40N3chwBbDZfcEqnVE6%2B0dvitAyyxAtraSuk%2FN%2BHA%3D%3D";
 
             // Act
-            var result = testee.GenerateGPWebPayRedirectUrl(url, request, privateCertificateFile, password,
-                publicCertificateFile, password);
+            var result = testee.GenerateGPWebPayRedirectUrl(url, request, privateCertificateFile, 
+                privateCertificatePassword,
+                publicCertificateFile, 
+                publicCertificatePassword);
 
             // Assert
             result.Should().BeEquivalentTo(expected);
@@ -68,9 +71,10 @@ namespace GPWebpayNet.Sdk.Spec.Services
         {
             // Arrange
             const string url = "https://example.org";
-            const string privateCertificateFile = "certs/test.pfx";
-            const string publicCertificateFile = "certs/test_cert.pem";
-            const string password = "test";
+            const string privateCertificateFile = "certs/client.pfx";
+            const string publicCertificateFile = "certs/client_pub.pem";
+            const string privateCertificatePassword = "test";
+            const string publicCertificatePassword = null;
 
             var request = new PaymentRequest
             {
@@ -100,8 +104,9 @@ namespace GPWebpayNet.Sdk.Spec.Services
 
             // Act
             // Assert
-            Action action = () => testee.GenerateGPWebPayRedirectUrl(url, request, privateCertificateFile, password,
-                publicCertificateFile, password);
+            Action action = () => testee.GenerateGPWebPayRedirectUrl(url, request, 
+                privateCertificateFile, privateCertificatePassword,
+                publicCertificateFile, publicCertificatePassword);
             action
                 .Should().Throw<DigestValidationException>()
                 .WithMessage("Invalid digest: digest");
@@ -112,9 +117,10 @@ namespace GPWebpayNet.Sdk.Spec.Services
         {
             // Arrange
             const string url = "https://example.org";
-            const string privateCertificateFile = "certs/test.pfx";
-            const string publicCertificateFile = "certs/test.pfx";
-            const string password = "test";
+            const string privateCertificateFile = "certs/client.pfx";
+            const string publicCertificateFile = "certs/client_pub.pem";
+            const string privateCertificatePassword = "test";
+            const string publicCertificatePassword = null;
 
             const string responseMessage = "Response from GPWP";
 
@@ -154,8 +160,9 @@ namespace GPWebpayNet.Sdk.Spec.Services
             const string expected = responseMessage;
 
             // Act
-            var result = await testee.PostRequestAsync(httpClient, url, request, privateCertificateFile, password,
-                publicCertificateFile, password);
+            var result = await testee.PostRequestAsync(httpClient, url, request,
+                privateCertificateFile, privateCertificatePassword,
+                publicCertificateFile, publicCertificatePassword);
 
             // Assert            
             result.Should().BeEquivalentTo(expected);
@@ -166,9 +173,10 @@ namespace GPWebpayNet.Sdk.Spec.Services
         {
             // Arrange
             const string url = "https://example.org";
-            const string privateCertificateFile = "certs/test.pfx";
-            const string publicCertificateFile = "certs/test.pfx";
-            const string password = "test";
+            const string privateCertificateFile = "certs/client.pfx";
+            const string publicCertificateFile = "certs/client_pub.pem";
+            const string privateCertificatePassword = "test";
+            const string publicCertificatePassword = null;
             const string responseMessage = "Response from GPWP";
 
             var fakeHttpMessageHandler = new Mock<FakeHttpMessageHandler> {CallBase = true};
@@ -208,8 +216,8 @@ namespace GPWebpayNet.Sdk.Spec.Services
             // Act
             // Assert
             Func<Task> action = async () => await testee.PostRequestAsync(httpClient, url, request,
-                privateCertificateFile, password,
-                publicCertificateFile, password);
+                privateCertificateFile, privateCertificatePassword,
+                publicCertificateFile, publicCertificatePassword);
             action
                 .Should().Throw<DigestValidationException>()
                 .WithMessage("Invalid digest: digest");
@@ -230,9 +238,10 @@ namespace GPWebpayNet.Sdk.Spec.Services
                 {"DIGEST", new StringValues("Digest")},
                 {"DIGEST1", new StringValues("Digest1")},
             });
-            
-            const string publicCertificateFile = "test.pfx";
-            const string password = "test";
+
+            const string merchantNumber = "62346346";
+            const string publicCertificateFile = "certs/server_pub.pem";
+            const string publicCertificatePassword = null;
         
             var encodingServiceMock = this.GetEncodingServiceMock("digest", true);
 
@@ -241,7 +250,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
                 new PaymentRequestTransformer(), new PaymentResponseTransformer(), clientServiceLoggerMock.Object);
     
             // Act
-            var result = testee.ProcessGPWebPayResponse(queryArgs, publicCertificateFile, password);
+            var result = testee.ProcessGPWebPayResponse(queryArgs, merchantNumber, publicCertificateFile, publicCertificatePassword);
 
             // Assert
             result.Operation.Should().BeEquivalentTo("Operation");
@@ -260,8 +269,9 @@ namespace GPWebpayNet.Sdk.Spec.Services
         public void Should_process_GPWP_response_from_response()
         {
             // Arrange
-            const string publicCertificateFile = "certs/test.pfx";
-            const string password = "test";
+            const string merchantNumber = "62346346";
+            const string publicCertificateFile = "certs/server_pub.pem";
+            const string publicCertificatePassword = null;
 
             var response = new PaymentResponse
             {
@@ -285,15 +295,56 @@ namespace GPWebpayNet.Sdk.Spec.Services
     
             // Act
             // Assert
-            testee.ProcessGPWebPayResponse(response, publicCertificateFile, password);
+            testee.ProcessGPWebPayResponse(response, merchantNumber, publicCertificateFile, publicCertificatePassword);
+        }
+        
+        [Fact]
+        public void Should_process_GPWP_response_from_response_no_mock()
+        {
+            // Arrange
+            const string merchantNumber = "62346346";
+            const string privateCertificateFile = "certs/server.pfx";
+            const string privateCertificatePassword = "test";
+            const string publicCertificateFile = "certs/server_pub.pem";
+            const string publicCertificatePassword = null;
+
+            var response = new PaymentResponse
+            {
+                Operation = "Operation",
+                OrderNumber = 12332,
+                MerOrderNumber = 0,
+                PRCode = 0,
+                SRCode = 0,
+                ResultText = "ResultText",
+                UserParam1 = "UserParam1",
+                AddInfo = null
+            };
+
+            var encodingServiceMock = this.GetLoggerMock<EncodingService>();
+            var encodingService = new EncodingService(encodingServiceMock.Object);
+            var prt = new PaymentResponseTransformer();
+
+            var parameterString = prt.GetParameterString(response);
+
+            response.Digest = encodingService.SignData(parameterString, privateCertificateFile, privateCertificatePassword);
+            response.Digest1 = encodingService.SignData($"{parameterString}|{merchantNumber}", privateCertificateFile, privateCertificatePassword);
+
+            var clientServiceLoggerMock = this.GetLoggerMock<ClientService>();
+            var testee = new ClientService(encodingService,
+                new PaymentRequestTransformer(), new PaymentResponseTransformer(), clientServiceLoggerMock.Object);
+    
+            // Act
+            // Assert
+            testee.ProcessGPWebPayResponse(response, merchantNumber, publicCertificateFile, publicCertificatePassword);
         }
         
         [Fact]
         public void Should_throw_DigestValidationException_when_process_GPWP_response_from_response_when_invalid_digest()
         {
             // Arrange
-            const string publicCertificateFile = "certs/test.pfx";
-            const string password = "test";
+            const string merchantNumber = "62346346";
+            const string publicCertificateFile = "certs/server_pub.pem";
+            const string publicCertificatePassword = null;
 
             var response = new PaymentResponse
             {
@@ -317,7 +368,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
 
             // Act
             // Assert
-            Action action = () => testee.ProcessGPWebPayResponse(response, publicCertificateFile, password);
+            Action action = () => testee.ProcessGPWebPayResponse(response, merchantNumber, publicCertificateFile, publicCertificatePassword);
             action
                 .Should().Throw<DigestValidationException>()
                 .WithMessage("Invalid digest: digest");
@@ -327,8 +378,9 @@ namespace GPWebpayNet.Sdk.Spec.Services
         public void Should_throw_PaymentResponseException_when_process_GPWP_response_from_response_when_invalid_response_prcode()
         {
             // Arrange
-            const string publicCertificateFile = "certs/test.pfx";
-            const string password = "test";
+            const string merchantNumber = "62346346";
+            const string publicCertificateFile = "certs/server_pub.pem";
+            const string publicCertificatePassword = null;
 
             var response = new PaymentResponse
             {
@@ -352,7 +404,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
     
             // Act
             // Assert
-            Action action = () => testee.ProcessGPWebPayResponse(response, publicCertificateFile, password);
+            Action action = () => testee.ProcessGPWebPayResponse(response, merchantNumber, publicCertificateFile, publicCertificatePassword);
             action
                 .Should().Throw<PaymentResponseException>()
                 .WithMessage("Bad response");
@@ -362,8 +414,9 @@ namespace GPWebpayNet.Sdk.Spec.Services
         public void Should_throw_PaymentResponseException_when_process_GPWP_response_from_response_when_invalid_response_srcode()
         {
             // Arrange
-            const string publicCertificateFile = "test.pfx";
-            const string password = "test";
+            const string merchantNumber = "62346346";
+            const string publicCertificateFile = "certs/server_pub.pem";
+            const string publicCertificatePassword = null;
 
             var response = new PaymentResponse
             {
@@ -387,7 +440,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
     
             // Act
             // Assert
-            Action action = () => testee.ProcessGPWebPayResponse(response, publicCertificateFile, password);
+            Action action = () => testee.ProcessGPWebPayResponse(response, merchantNumber, publicCertificateFile, publicCertificatePassword);
             action
                 .Should().Throw<PaymentResponseException>()
                 .WithMessage("Bad response");

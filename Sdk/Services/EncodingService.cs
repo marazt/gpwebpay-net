@@ -21,12 +21,12 @@ namespace GPWebpayNet.Sdk.Services
             this.logger = logger;
         }
 
-        public string SignData(string message, string privateCertificateFile, string password, int encoding = Encoding.DefaultEncoding, X509KeyStorageFlags keyStorageFlags = Encoding.DefaultKeyStorageFlags)
+        public string SignData(string message, string certificateFile, string certificatePassword, int encoding = Encoding.DefaultEncoding, X509KeyStorageFlags keyStorageFlags = Encoding.DefaultKeyStorageFlags)
         {
             try
             {
                 var msgData = System.Text.Encoding.GetEncoding(encoding).GetBytes(message);
-                var cert = new X509Certificate2(privateCertificateFile, password, keyStorageFlags);
+                var cert = new X509Certificate2(certificateFile, certificatePassword, keyStorageFlags);
 
                 byte[] hash;
                 using (var rsa = cert.GetRSAPrivateKey())
@@ -49,17 +49,17 @@ namespace GPWebpayNet.Sdk.Services
             {
                 this.logger.LogError($"Error while signing data: {ex.Message}\n{ex.StackTrace}");
                 this.logger.LogError($"Message: {message}");
-                this.logger.LogError($"Private ceritificate: {privateCertificateFile}");
+                this.logger.LogError($"Private ceritificate: {certificateFile}");
                 throw new SignDataException("Error while signing data", ex);
             }
         }
 
-        public bool ValidateDigest(string digest, string message, string publicCertificateFile, string password, int encoding = Encoding.DefaultEncoding, X509KeyStorageFlags keyStorageFlags = Encoding.DefaultKeyStorageFlags)
+        public bool ValidateDigest(string digest, string message, string certificateFile, string certificatePassword, int encoding = Encoding.DefaultEncoding, X509KeyStorageFlags keyStorageFlags = Encoding.DefaultKeyStorageFlags)
         {
             try
             {
                 var byteDigest = Convert.FromBase64String(digest);
-                var cert = new X509Certificate2(publicCertificateFile, password, keyStorageFlags);
+                var cert = new X509Certificate2(certificateFile, certificatePassword, keyStorageFlags);
                 var data = System.Text.Encoding.GetEncoding(encoding).GetBytes(message);
                 var sha = SHA1.Create();
                 var hashResult = sha.ComputeHash(data);
@@ -82,7 +82,7 @@ namespace GPWebpayNet.Sdk.Services
                 this.logger.LogError($"Error while validating digest: {ex.Message}\n{ex.StackTrace}");
                 this.logger.LogError($"Digest: {digest}");
                 this.logger.LogError($"Message: {message}");
-                this.logger.LogError($"Public ceritificate: {publicCertificateFile}");
+                this.logger.LogError($"Public ceritificate: {certificateFile}");
                 throw new DigestValidationException("Error while validating digest", ex);
             }
         }

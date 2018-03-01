@@ -13,16 +13,17 @@ namespace GPWebpayNet.Sdk.Spec.Services
         {
             // Arrange
             const string message = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.";
-            const string privateCertificateFile = "certs/test.pfx";
-            const string publicCertificateFile = "certs/test.pfx";
-            const string password = "test";
+            const string privateCertificateFile = "certs/client.pfx";
+            const string publicCertificateFile = "certs/client_pub.pem";
+            const string privateCertificatePassword = "test";
+            const string publicCertificatePassword = null;
 
             var loggerMock = GetLoggerMock<EncodingService>();
             var testee = new EncodingService(loggerMock.Object);
-            var digest = testee.SignData(message, privateCertificateFile, password);
+            var digest = testee.SignData(message, privateCertificateFile, privateCertificatePassword);
             
             // Act
-            var result = testee.ValidateDigest(digest, message, publicCertificateFile, password);
+            var result = testee.ValidateDigest(digest, message, publicCertificateFile, publicCertificatePassword);
 
             // Assert
             result.Should().BeTrue();
@@ -34,16 +35,17 @@ namespace GPWebpayNet.Sdk.Spec.Services
             // Arrage
             const string message = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.";
             const string badMessage = "Lorem ipsum dolor sit amet.";
-            const string privateCertificateFile = "certs/test.pfx";
-            const string publicCertificateFile = "certs/test.pfx";
-            const string password = "test";
+            const string privateCertificateFile = "certs/client.pfx";
+            const string publicCertificateFile = "certs/client_pub.pem";
+            const string privateCertificatePassword = "test";
+            const string publicCertificatePassword = null;
 
             var loggerMock = GetLoggerMock<EncodingService>();
             var testee = new EncodingService(loggerMock.Object);
-            var digest = testee.SignData(message, privateCertificateFile, password);
+            var digest = testee.SignData(message, privateCertificateFile, privateCertificatePassword);
             
             // Act
-            var result = testee.ValidateDigest(digest, badMessage, publicCertificateFile, password);
+            var result = testee.ValidateDigest(digest, badMessage, publicCertificateFile, publicCertificatePassword);
 
             // Assert
             result.Should().BeFalse();
@@ -54,15 +56,15 @@ namespace GPWebpayNet.Sdk.Spec.Services
         {
             // Arrange
             const string message = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.";
-            const string privateCertificateFile = "certs/test_key.pem";
-            const string password = "test";
+            const string privateCertificateFile = "certs/non_existing.pfx";
+            const string privateCertificatePassword = "test";
 
             var loggerMock = GetLoggerMock<EncodingService>();
             var testee = new EncodingService(loggerMock.Object);
             
             // Act
             // Assert
-            Action action = () => testee.SignData(message, privateCertificateFile, password);
+            Action action = () => testee.SignData(message, privateCertificateFile, privateCertificatePassword);
             action
                 .Should().Throw<SignDataException>()
                 .WithMessage("Error while signing data");
@@ -73,15 +75,14 @@ namespace GPWebpayNet.Sdk.Spec.Services
         {
             // Arrange
             const string message = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.";
-            const string privateCertificateFile = "certs/test.pfx";
-            const string password = "badpassword";
-
+            const string privateCertificateFile = "certs/client.pfx";
+            const string privateCertificatePassword = "bad_password";
             var loggerMock = GetLoggerMock<EncodingService>();
             var testee = new EncodingService(loggerMock.Object);
             
             // Act
             // Assert
-            Action action = () => testee.SignData(message, privateCertificateFile, password);
+            Action action = () => testee.SignData(message, privateCertificateFile, privateCertificatePassword);
             action
                 .Should().Throw<SignDataException>()
                 .WithMessage("Error while signing data");
@@ -92,8 +93,8 @@ namespace GPWebpayNet.Sdk.Spec.Services
         {
             // Arrange
             const string message = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.";
-            const string publicCertificateFile = "certs/test_cert.cer";
-            const string password = "test";
+            const string publicCertificateFile = "certs/non_existing.pem";
+            const string publicCertificatePassword = null;
             const string digest = "somedata";
 
             var loggerMock = GetLoggerMock<EncodingService>();
@@ -101,7 +102,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
             
             // Act
             // Assert
-            Action action = () => testee.ValidateDigest(digest, message, publicCertificateFile, password);
+            Action action = () => testee.ValidateDigest(digest, message, publicCertificateFile, publicCertificatePassword);
             action
                 .Should().Throw<DigestValidationException>()
                 .WithMessage("Error while validating digest");

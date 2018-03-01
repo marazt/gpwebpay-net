@@ -7,14 +7,15 @@
     <RootNamespace>GPWebpayNet.Sdk</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Description>GPWebpayNet is a helper library for communication with GP webpay(https://www.gpwebpay.cz) payment gateway via HTTP.</Description>
+    <Description>GPWebpayNet is a helper library for communication with GP webpay(www.gpwebpay.com) payment gateway via HTTP.</Description>
     <Copyright>© 2017-2018 Marek Polak</Copyright>
     <PackageProjectUrl>https://github.com/marazt/gpwebpay-net</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/marazt/gpwebpay-net/blob/master/LICENSE</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/marazt/gpwebpay-net</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>payment; gateway, payment gateway; sdk; gpwebpay;</PackageTags>
-    <PackageReleaseNotes>First version</PackageReleaseNotes>
+    <PackageReleaseNotes>Digest1 validation</PackageReleaseNotes>
+    <Version>1.1.0</Version>
   </PropertyGroup>
   <!-- common NuGet package refs that affect all projects -->
   <!--https://weblog.west-wind.com/posts/2017/Jun/22/MultiTargeting-and-Porting-a-NET-Library-to-NET-Core-20-->

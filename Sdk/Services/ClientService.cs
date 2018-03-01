@@ -102,19 +102,31 @@ namespace GPWebpayNet.Sdk.Services
 
         public void ProcessGPWebPayResponse(
             PaymentResponse paymentResponse,
-            string publicCert,
-            string publicCertPassword
+            string merchantNumber,
+            string certificate,
+            string certificatePassword
         )
         {
             var isValid = this.encodingService.ValidateDigest(paymentResponse.Digest,
                 this.paymnetResponseTransformer.GetParameterString(paymentResponse),
-                publicCert,
-                publicCertPassword);
+                certificate,
+                certificatePassword);
 
             if (!isValid)
             {
                 this.logger.LogError($"Invalid digest: {paymentResponse.Digest}");
                 throw new DigestValidationException($"Invalid digest: {paymentResponse.Digest}", null);
+            }
+            
+            isValid = this.encodingService.ValidateDigest(paymentResponse.Digest1,
+                $"{this.paymnetResponseTransformer.GetParameterString(paymentResponse)}|{merchantNumber}",
+                certificate,
+                certificatePassword);
+
+            if (!isValid)
+            {
+                this.logger.LogError($"Invalid diges1t: {paymentResponse.Digest1}");
+                throw new DigestValidationException($"Invalid digest1: {paymentResponse.Digest1}", null);
             }
 
             if (paymentResponse.PRCode != 0 || paymentResponse.SRCode != 0)
@@ -127,12 +139,13 @@ namespace GPWebpayNet.Sdk.Services
         
         public PaymentResponse ProcessGPWebPayResponse(
             IQueryCollection queryArgs,
-            string publicCert,
-            string publicCertPassword
+            string merchantNumber,
+            string certificate,
+            string certificatePassword
         )
         {
             var paymentResponse = this.paymnetResponseTransformer.GetPaymentResponse(queryArgs);
-            this.ProcessGPWebPayResponse(paymentResponse, publicCert, publicCertPassword);
+            this.ProcessGPWebPayResponse(paymentResponse, merchantNumber, certificate, certificatePassword);
             return paymentResponse;
         }
 
