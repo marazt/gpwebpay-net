@@ -10,6 +10,9 @@ using Microsoft.Extensions.Logging;
 
 namespace GPWebpayNet.Sdk.Services
 {
+    /// <summary>
+    /// Main Sdk class representing client for communication.
+    /// </summary>
     public class ClientService : IClientService
     {
         private static readonly KeyValuePair<string, string>[] Headers =
@@ -23,6 +26,13 @@ namespace GPWebpayNet.Sdk.Services
         private readonly IPaymentResponseTransformer paymnetResponseTransformer;
         private readonly ILogger logger;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ClientService"/> class.
+        /// </summary>
+        /// <param name="encodingService">The encoding service.</param>
+        /// <param name="paymnetRequestTransformer">The paymnet request transformer.</param>
+        /// <param name="paymnetResponseTransformer">The paymnet response transformer.</param>
+        /// <param name="logger">The logger.</param>
         public ClientService(
             IEncodingService encodingService,
             IPaymentRequestTransformer paymnetRequestTransformer,
@@ -35,6 +45,21 @@ namespace GPWebpayNet.Sdk.Services
             this.logger = logger;
         }
 
+
+        /// <summary>
+        /// Create a request to GPWebpay Gateway and returns response as a string.
+        /// </summary>
+        /// <param name="client">The client.</param>
+        /// <param name="url">The URL.</param>
+        /// <param name="paymentRequest">The payment request.</param>
+        /// <param name="privateCert">The private cert.</param>
+        /// <param name="privateCertPassword">The private cert password.</param>
+        /// <param name="publicCert">The public cert.</param>
+        /// <param name="publicCertPassword">The public cert password.</param>
+        /// <returns>
+        /// Response message as a string.
+        /// </returns>
+        /// <exception cref="GPWebpayNet.Sdk.Exceptions.DigestValidationException">ull)</exception>
         public async Task<string> PostRequestAsync(
             HttpClient client,
             string url,
@@ -71,6 +96,20 @@ namespace GPWebpayNet.Sdk.Services
             return responseMessage;
         }
 
+
+        /// <summary>
+        /// Generates the GPWebpay redirect URL.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <param name="paymentRequest">The payment request.</param>
+        /// <param name="privateCert">The private cert.</param>
+        /// <param name="privateCertPassword">The private cert password.</param>
+        /// <param name="publicCert">The public cert.</param>
+        /// <param name="publicCertPassword">The public cert password.</param>
+        /// <returns>
+        /// Redirect URL.
+        /// </returns>
+        /// <exception cref="GPWebpayNet.Sdk.Exceptions.DigestValidationException">ull)</exception>
         public string GenerateGPWebPayRedirectUrl(
             string url,
             PaymentRequest paymentRequest,
@@ -100,6 +139,20 @@ namespace GPWebpayNet.Sdk.Services
             return $"{url}?{args}";
         }
 
+
+        /// <summary>
+        /// Processes (validates) response from GPWebpay.
+        /// </summary>
+        /// <param name="paymentResponse">The payment response.</param>
+        /// <param name="merchantNumber">The merchant number.</param>
+        /// <param name="certificate">The certificate.</param>
+        /// <param name="certificatePassword">The certificate password.</param>
+        /// <exception cref="GPWebpayNet.Sdk.Exceptions.DigestValidationException">
+        /// ull)
+        /// or
+        /// ull)
+        /// </exception>
+        /// <exception cref="GPWebpayNet.Sdk.Exceptions.PaymentResponseException">Bad response - null</exception>
         public void ProcessGPWebPayResponse(
             PaymentResponse paymentResponse,
             string merchantNumber,
@@ -136,19 +189,35 @@ namespace GPWebpayNet.Sdk.Services
                     null);
             }
         }
-        
+
+
+        /// <summary>
+        /// Processes (validates) response from GPWebpay.
+        /// </summary>
+        /// <param name="queryArgs">The query arguments.</param>
+        /// <param name="merchantNumber">The merchant number.</param>
+        /// <param name="publicCert">The public cert.</param>
+        /// <param name="publicCertPassword">The public cert password.</param>
+        /// <returns>
+        /// Payment response generated from query args.
+        /// </returns>
         public PaymentResponse ProcessGPWebPayResponse(
             IQueryCollection queryArgs,
             string merchantNumber,
-            string certificate,
-            string certificatePassword
+            string publicCert,
+            string publicCertPassword
         )
         {
             var paymentResponse = this.paymnetResponseTransformer.GetPaymentResponse(queryArgs);
-            this.ProcessGPWebPayResponse(paymentResponse, merchantNumber, certificate, certificatePassword);
+            this.ProcessGPWebPayResponse(paymentResponse, merchantNumber, publicCert, publicCertPassword);
             return paymentResponse;
         }
 
+        /// <summary>
+        /// Prepares the Http client.
+        /// </summary>
+        /// <param name="client">The client.</param>
+        /// <returns>Http client instance.</returns>
         private static HttpClient PrepareClient(HttpClient client)
         {
             client.DefaultRequestHeaders.Clear();
@@ -159,17 +228,34 @@ namespace GPWebpayNet.Sdk.Services
 
             return client;
         }
-        
+
+        /// <summary>
+        /// Gets the message from kvp parameters.
+        /// </summary>
+        /// <param name="parameters">The parameters.</param>
+        /// <returns>Concatenation of kvp parameters.</returns>
         private static string GetMessage(IEnumerable<KeyValuePair<string, string>> parameters)
         {
             return string.Join("|", parameters.Select(e => e.Value));
         }
 
+        /// <summary>
+        /// Pretty-prints parameters.
+        /// </summary>
+        /// <param name="parameters">The parameters.</param>
+        /// <returns>Pretty-printed paramters.</returns>
         private static string PrettyPrintParameters(IEnumerable<KeyValuePair<string, string>> parameters)
         {
             return ClientService.ParametersToString(parameters, Environment.NewLine, ": ");
         }
 
+        /// <summary>
+        /// Transform kvp parameters into a string.
+        /// </summary>
+        /// <param name="parameters">The parameters.</param>
+        /// <param name="lineDelimiter">The line delimiter.</param>
+        /// <param name="keyValueDelimiter">The key value delimiter.</param>
+        /// <returns>Kvp parameters as a string.</returns>
         private static string ParametersToString(IEnumerable<KeyValuePair<string, string>> parameters,
             string lineDelimiter, string keyValueDelimiter)
         {

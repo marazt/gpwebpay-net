@@ -7,20 +7,47 @@ using Microsoft.Extensions.Logging;
 
 namespace GPWebpayNet.Sdk.Services
 {
+    /// <summary>
+    /// Encoding service.
+    /// </summary>
+    /// <seealso cref="GPWebpayNet.Sdk.Services.IEncodingService" />
     public class EncodingService : IEncodingService
     {
         private readonly ILogger logger;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EncodingService"/> class.
+        /// Needed to be called explicitelly in .netcore
+        /// </summary>
         public EncodingService()
         {
             System.Text.Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);  
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EncodingService"/> class.
+        /// </summary>
+        /// <param name="logger">The logger.</param>
         public EncodingService(ILogger<EncodingService> logger) : this()
         {
             this.logger = logger;
         }
 
+
+        /// <summary>
+        /// Signs the data.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="certificateFile">The certificate file.</param>
+        /// <param name="certificatePassword">The certificate password.</param>
+        /// <param name="encoding">The encoding.</param>
+        /// <param name="keyStorageFlags">The key storage flags.</param>
+        /// <returns>Signed mesage data (digest).</returns>
+        /// <exception cref="GPWebpayNet.Sdk.Exceptions.SignDataException">
+        /// No private key found - null
+        /// or
+        /// Error while signing data
+        /// </exception>
         public string SignData(string message, string certificateFile, string certificatePassword, int encoding = Encoding.DefaultEncoding, X509KeyStorageFlags keyStorageFlags = Encoding.DefaultKeyStorageFlags)
         {
             try
@@ -54,6 +81,21 @@ namespace GPWebpayNet.Sdk.Services
             }
         }
 
+        /// <summary>
+        /// Validates the digest.
+        /// </summary>
+        /// <param name="digest">The digest.</param>
+        /// <param name="message">The message.</param>
+        /// <param name="certificateFile">The certificate file.</param>
+        /// <param name="certificatePassword">The certificate password.</param>
+        /// <param name="encoding">The encoding.</param>
+        /// <param name="keyStorageFlags">The key storage flags.</param>
+        /// <returns>Validation result.</returns>
+        /// <exception cref="GPWebpayNet.Sdk.Exceptions.DigestValidationException">
+        /// No pulic key found - null
+        /// or
+        /// Error while validating digest
+        /// </exception>
         public bool ValidateDigest(string digest, string message, string certificateFile, string certificatePassword, int encoding = Encoding.DefaultEncoding, X509KeyStorageFlags keyStorageFlags = Encoding.DefaultKeyStorageFlags)
         {
             try

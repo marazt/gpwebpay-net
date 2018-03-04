@@ -7,6 +7,10 @@ using GPWebpayNet.Sdk.Models;
 
 namespace GPWebpayNet.Sdk.Services
 {
+    /// <summary>
+    /// Payment request transformer helper.
+    /// </summary>
+    /// <seealso cref="GPWebpayNet.Sdk.Services.IPaymentRequestTransformer" />
     public class PaymentRequestTransformer : IPaymentRequestTransformer
     {
         private const int MaxLength = 255;
@@ -14,6 +18,13 @@ namespace GPWebpayNet.Sdk.Services
         private static int GetLength(int len) => Math.Min(len, MaxLength);
 
 
+        /// <summary>
+        /// Gets the parameters for digest calculation.
+        /// </summary>
+        /// <param name="paymentRequest">The payment request.</param>
+        /// <returns>
+        /// Collection of kvp in exact form described in GPWebpay documentation.
+        /// </returns>
         public IList<KeyValuePair<string, string>> GetParametersForDigestCalculation(PaymentRequest paymentRequest)
         {
             var parameters = new List<KeyValuePair<string, string>>

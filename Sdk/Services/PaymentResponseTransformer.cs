@@ -4,8 +4,19 @@ using Microsoft.AspNetCore.Http;
 
 namespace GPWebpayNet.Sdk.Services
 {
+    /// <summary>
+    /// Payment response transformer helper.
+    /// </summary>
+    /// <seealso cref="GPWebpayNet.Sdk.Services.IPaymentResponseTransformer" />
     public class PaymentResponseTransformer : IPaymentResponseTransformer
     {
+        /// <summary>
+        /// Gets the payment response instace from query arguments.
+        /// </summary>
+        /// <param name="queryArgs">The query arguments.</param>
+        /// <returns>
+        /// PaymentResponse instance.
+        /// </returns>
         public PaymentResponse GetPaymentResponse(IQueryCollection queryArgs)
         {
             XmlElement addInfo = null;
@@ -32,7 +43,15 @@ namespace GPWebpayNet.Sdk.Services
                 Digest1 = queryArgs["DIGEST1"]
             };
         }
-        
+
+        /// <summary>
+        /// Gets the parameter string from PaymentResponse instance.
+        /// Parameter string must have exact form described in GPWebpay documentation.
+        /// </summary>
+        /// <param name="paymentResponse">The payment response.</param>
+        /// <returns>
+        /// PaymentResponse representted as a string message.
+        /// </returns>
         public string GetParameterString(PaymentResponse paymentResponse)
         {
             var merOrderNumber = paymentResponse.MerOrderNumber == 0 ? string.Empty : $"{paymentResponse.MerOrderNumber}|";
