@@ -11,12 +11,12 @@ has different assemblies for working with ceritficates.
 
 
 ### Version
-- **Version 1.1.0** - 2018-03-01
+- **Version 1.2.0** - 2018-03-16
 
 
 ### Getting Started/Installing
 ```
-Install-Package GPWebpayNet.Sdk -Version 1.1.0
+Install-Package GPWebpayNet.Sdk -Version 1.2.0
 ```
 
 ### .NET Framework Support
@@ -173,7 +173,7 @@ Pull requests, bug reports, and feature requests are welcome.
 
 ## License
 
-� 2017-2018 Marek Polak. This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+© 2017-2018 Marek Polak. This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
 
 ## Acknowledgments

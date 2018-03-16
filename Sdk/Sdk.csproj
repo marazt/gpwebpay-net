@@ -14,8 +14,8 @@
     <RepositoryUrl>https://github.com/marazt/gpwebpay-net</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>payment; gateway, payment gateway; sdk; gpwebpay;</PackageTags>
-    <PackageReleaseNotes>Digest1 validation</PackageReleaseNotes>
-    <Version>1.1.0</Version>
+    <PackageReleaseNotes>Extension of the IEncodingService and IClientService to support certificate instance too (Not only certificate path and its password).</PackageReleaseNotes>
+    <Version>1.2.0</Version>
   </PropertyGroup>
   <!-- common NuGet package refs that affect all projects -->
   <!--https://weblog.west-wind.com/posts/2017/Jun/22/MultiTargeting-and-Porting-a-NET-Library-to-NET-Core-20-->
