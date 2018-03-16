@@ -1,4 +1,5 @@
 using System;
+using System.Security.Cryptography.X509Certificates;
 using FluentAssertions;
 using GPWebpayNet.Sdk.Exceptions;
 using GPWebpayNet.Sdk.Services;
@@ -21,14 +22,39 @@ namespace GPWebpayNet.Sdk.Spec.Services
             var loggerMock = GetLoggerMock<EncodingService>();
             var testee = new EncodingService(loggerMock.Object);
             var digest = testee.SignData(message, privateCertificateFile, privateCertificatePassword);
-            
+
             // Act
             var result = testee.ValidateDigest(digest, message, publicCertificateFile, publicCertificatePassword);
 
             // Assert
             result.Should().BeTrue();
         }
-        
+
+        [Fact]
+        public void Should_sign_and_validate_valid_digest_with_certificate()
+        {
+            // Arrange
+            const string message = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.";
+            const string privateCertificateFile = "certs/client.pfx";
+            const string publicCertificateFile = "certs/client_pub.pem";
+            const string privateCertificatePassword = "test";
+            const string publicCertificatePassword = null;
+            var privateCert = new X509Certificate2(privateCertificateFile, privateCertificatePassword,
+                Encoding.DefaultKeyStorageFlags);
+            var publicCert = new X509Certificate2(publicCertificateFile, publicCertificatePassword,
+                Encoding.DefaultKeyStorageFlags);
+
+            var loggerMock = GetLoggerMock<EncodingService>();
+            var testee = new EncodingService(loggerMock.Object);
+            var digest = testee.SignData(message, privateCert);
+
+            // Act
+            var result = testee.ValidateDigest(digest, message, publicCert);
+
+            // Assert
+            result.Should().BeTrue();
+        }
+
         [Fact]
         public void Should_sign_and_validate_invalid_digest()
         {
@@ -43,14 +69,40 @@ namespace GPWebpayNet.Sdk.Spec.Services
             var loggerMock = GetLoggerMock<EncodingService>();
             var testee = new EncodingService(loggerMock.Object);
             var digest = testee.SignData(message, privateCertificateFile, privateCertificatePassword);
-            
+
             // Act
             var result = testee.ValidateDigest(digest, badMessage, publicCertificateFile, publicCertificatePassword);
 
             // Assert
             result.Should().BeFalse();
         }
-        
+
+        [Fact]
+        public void Should_sign_and_validate_invalid_digest_certificate()
+        {
+            // Arrage
+            const string message = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.";
+            const string badMessage = "Lorem ipsum dolor sit amet.";
+            const string privateCertificateFile = "certs/client.pfx";
+            const string publicCertificateFile = "certs/client_pub.pem";
+            const string privateCertificatePassword = "test";
+            const string publicCertificatePassword = null;
+            var privateCert = new X509Certificate2(privateCertificateFile, privateCertificatePassword,
+                Encoding.DefaultKeyStorageFlags);
+            var publicCert = new X509Certificate2(publicCertificateFile, publicCertificatePassword,
+                Encoding.DefaultKeyStorageFlags);
+
+            var loggerMock = GetLoggerMock<EncodingService>();
+            var testee = new EncodingService(loggerMock.Object);
+            var digest = testee.SignData(message, privateCert);
+
+            // Act
+            var result = testee.ValidateDigest(digest, badMessage, publicCert);
+
+            // Assert
+            result.Should().BeFalse();
+        }
+
         [Fact]
         public void Should_throw_SignDataException_while_sign_data_when_private_key_is_not_found()
         {
@@ -61,7 +113,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
 
             var loggerMock = GetLoggerMock<EncodingService>();
             var testee = new EncodingService(loggerMock.Object);
-            
+
             // Act
             // Assert
             Action action = () => testee.SignData(message, privateCertificateFile, privateCertificatePassword);
@@ -69,7 +121,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
                 .Should().Throw<SignDataException>()
                 .WithMessage("Error while signing data");
         }
-        
+
         [Fact]
         public void Should_throw_SignDataException_while_sign_data_when_invalid_password_set()
         {
@@ -79,7 +131,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
             const string privateCertificatePassword = "bad_password";
             var loggerMock = GetLoggerMock<EncodingService>();
             var testee = new EncodingService(loggerMock.Object);
-            
+
             // Act
             // Assert
             Action action = () => testee.SignData(message, privateCertificateFile, privateCertificatePassword);
@@ -87,7 +139,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
                 .Should().Throw<SignDataException>()
                 .WithMessage("Error while signing data");
         }
-        
+
         [Fact]
         public void Should_throw_DigestValidationException_while_validate_digest_when_public_key_is_not_found()
         {
@@ -99,10 +151,11 @@ namespace GPWebpayNet.Sdk.Spec.Services
 
             var loggerMock = GetLoggerMock<EncodingService>();
             var testee = new EncodingService(loggerMock.Object);
-            
+
             // Act
             // Assert
-            Action action = () => testee.ValidateDigest(digest, message, publicCertificateFile, publicCertificatePassword);
+            Action action = () =>
+                testee.ValidateDigest(digest, message, publicCertificateFile, publicCertificatePassword);
             action
                 .Should().Throw<DigestValidationException>()
                 .WithMessage("Error while validating digest");
