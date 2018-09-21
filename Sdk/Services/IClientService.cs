@@ -21,6 +21,8 @@ namespace GPWebpayNet.Sdk.Services
         /// <param name="privateCertPassword">The private cert password.</param>
         /// <param name="publicCert">The public cert.</param>
         /// <param name="publicCertPassword">The public cert password.</param>
+        /// <param name="encoding">The encoding.</param>
+        /// <param name="keyStorageFlags">The key storage flags.</param>
         /// <returns>Response message as a string.</returns>
         Task<string> PostRequestAsync(
             HttpClient client,
@@ -29,7 +31,10 @@ namespace GPWebpayNet.Sdk.Services
             string privateCert,
             string privateCertPassword,
             string publicCert,
-            string publicCertPassword);
+            string publicCertPassword,
+            int encoding = Encoding.DefaultEncoding,
+            X509KeyStorageFlags keyStorageFlags = Encoding.DefaultKeyStorageFlags);
+
         
         /// <summary>
         /// Create a request to GPWebpay Gateway and returns response as a string.
@@ -57,6 +62,8 @@ namespace GPWebpayNet.Sdk.Services
         /// <param name="privateCertPassword">The private cert password.</param>
         /// <param name="publicCert">The public cert.</param>
         /// <param name="publicCertPassword">The public cert password.</param>
+        /// <param name="encoding">The encoding.</param>
+        /// <param name="keyStorageFlags">The key storage flags.</param>
         /// <returns>Redirect URL.</returns>
         string GenerateGPWebPayRedirectUrl(
             string url,
@@ -64,7 +71,10 @@ namespace GPWebpayNet.Sdk.Services
             string privateCert,
             string privateCertPassword,
             string publicCert,
-            string publicCertPassword);
+            string publicCertPassword,
+            int encoding = Encoding.DefaultEncoding,
+            X509KeyStorageFlags keyStorageFlags = Encoding.DefaultKeyStorageFlags);
+
         
         /// <summary>
         /// Generates the GPWebpay redirect URL.

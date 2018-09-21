@@ -119,6 +119,19 @@ public string GetRedirectUrl()
         privateCertificateFilePassword,
         publicCertificateFile, 
         publicCertificateFilePassword);
+        
+    // In case of `X509Certificate2` error on IIS or Azure while calling `GenerateGPWebPayRedirectUrl` or `PostRequestAsync`
+    // call such method with different *keyStorageFlags* argument:
+    // return clientService.GenerateGPWebPayRedirectUrl(
+    //     url,
+    //     request,
+    //     privateCertificateFile,
+    //     privateCertificateFilePassword,
+    //     publicCertificateFile, 
+    //     publicCertificateFilePassword,
+    //     Encoding.DefaultEncoding,
+    //     X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.EphemeralKeySet);
+
 }
 ```
 

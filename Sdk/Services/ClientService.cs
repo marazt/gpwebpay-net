@@ -57,6 +57,8 @@ namespace GPWebpayNet.Sdk.Services
         /// <param name="privateCertPassword">The private cert password.</param>
         /// <param name="publicCert">The public cert.</param>
         /// <param name="publicCertPassword">The public cert password.</param>
+        /// <param name="encoding">The encoding.</param>
+        /// <param name="keyStorageFlags">The key storage flags.</param>
         /// <returns>
         /// Response message as a string.
         /// </returns>
@@ -68,11 +70,14 @@ namespace GPWebpayNet.Sdk.Services
             string privateCert,
             string privateCertPassword,
             string publicCert,
-            string publicCertPassword)
+            string publicCertPassword,
+            int encoding = Encoding.DefaultEncoding, 
+            X509KeyStorageFlags keyStorageFlags = Encoding.DefaultKeyStorageFlags)
+
         {
             var parameters = this.paymnetRequestTransformer.GetParametersForDigestCalculation(paymentRequest);
             var message = ClientService.GetMessage(parameters);
-            var digest = this.encodingService.SignData(message, privateCert, privateCertPassword);
+            var digest = this.encodingService.SignData(message, privateCert, privateCertPassword, encoding, keyStorageFlags);
             var isValid = this.encodingService.ValidateDigest(digest, message, publicCert, publicCertPassword);
 
             this.logger.LogInformation(
@@ -153,6 +158,8 @@ namespace GPWebpayNet.Sdk.Services
         /// <param name="privateCertPassword">The private cert password.</param>
         /// <param name="publicCert">The public cert.</param>
         /// <param name="publicCertPassword">The public cert password.</param>
+        /// <param name="encoding">The encoding.</param>
+        /// <param name="keyStorageFlags">The key storage flags.</param>
         /// <returns>
         /// Redirect URL.
         /// </returns>
@@ -163,12 +170,15 @@ namespace GPWebpayNet.Sdk.Services
             string privateCert,
             string privateCertPassword,
             string publicCert,
-            string publicCertPassword)
+            string publicCertPassword,
+            int encoding = Encoding.DefaultEncoding, 
+            X509KeyStorageFlags keyStorageFlags = Encoding.DefaultKeyStorageFlags)
+
         {
             var parameters = this.paymnetRequestTransformer.GetParametersForDigestCalculation(paymentRequest);
             var message = ClientService.GetMessage(parameters);
             var digest = this.encodingService.SignData(message, privateCert, privateCertPassword);
-            var isValid = this.encodingService.ValidateDigest(digest, message, publicCert, publicCertPassword);
+            var isValid = this.encodingService.ValidateDigest(digest, message, publicCert, publicCertPassword, encoding, keyStorageFlags);
 
             this.logger.LogInformation(
                 $"GPWP parameters: {ClientService.PrettyPrintParameters(parameters)}");
