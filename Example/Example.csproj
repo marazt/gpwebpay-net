@@ -6,6 +6,28 @@
     <RootNamespace>GPWebpayNet.Example</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="certs\test.cer" />
+    <None Remove="certs\test.pfx" />
+    <None Remove="certs\test_cert.pem" />
+    <None Remove="certs\test_key.pem" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="certs\test.pfx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="certs\test_cert.pem">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="certs\test_key.pem">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="certs\test.cer">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Sdk\Sdk.csproj">
       <Project>{CCA86B2F-9594-4B96-B95F-89A0D66E3DAF}</Project>
       <Name>Sdk</Name>

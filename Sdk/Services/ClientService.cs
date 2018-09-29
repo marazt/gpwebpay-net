@@ -273,7 +273,7 @@ namespace GPWebpayNet.Sdk.Services
 
             if (!isValid)
             {
-                this.logger.LogError($"Invalid diges1t: {paymentResponse.Digest1}");
+                this.logger.LogError($"Invalid digest1: {paymentResponse.Digest1}");
                 throw new DigestValidationException($"Invalid digest1: {paymentResponse.Digest1}", null);
             }
 

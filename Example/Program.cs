@@ -20,14 +20,14 @@ namespace GPWebpayNet.Example
     {
         public static void Main()
         {
-            
+            GetRedirectUrl();
         }
         
         /// <summary>
         /// Sample call to get redirect url that can be used in Controller
         /// or send it as a response to redirect to GPWP payment page 
         /// </summary>
-        private void GetRedirectUrl()
+        private static void GetRedirectUrl()
         {
             var loggerFactory = new LoggerFactory()
                 .AddConsole();
@@ -78,7 +78,7 @@ namespace GPWebpayNet.Example
         /// <summary>
         /// Sample of the POST call to GPWP
         /// </summary>
-        private async void PostRequestAsync()
+        private static async void PostRequestAsync()
         {
             var loggerFactory = new LoggerFactory()
                 .AddConsole();
@@ -134,7 +134,7 @@ namespace GPWebpayNet.Example
         /// <summary>
         /// Sample handling of the incomming request from GPWP after payment process
         /// </summary>
-        private void ProcessIncommingGPWPRequest()
+        private static void ProcessIncommingGPWPRequest()
         {
             var loggerFactory = new LoggerFactory()
                 .AddConsole();

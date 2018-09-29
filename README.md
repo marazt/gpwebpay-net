@@ -66,8 +66,28 @@ The main project class is *GPWebpayNet.Sdk.Services.ClientService* that provides
 Other classes are used by this class. Whole project is designed to be used with some IoC framework so classes are decoupled.
 
 
-#### GPWebpayNet.Example
+#### GPWebpayNet.Spec
 It contains SDK unit tests.
+
+
+### Certificates
+A library requires following keys:
+1. *pfx* key containing your private key and public key
+1. *pem* key containing GP Webpay public certificate
+
+GP Webpay provides two keys that must be transformed to proper formats:
+1. Your private *key* file that must be transformed to *pfx*
+2. GP Webpay public certificate *cer* in *der* format
+
+#### Certificate transformation
+1. Create a public crt from a private key received from GP webpay:
+`openssl req -new -x509 -days 1826 -key PRIVATE_KEY_FROM_GP.key -out GENERATED_CERT_FROM_PRIVATE_KEY.crt`
+1. Create pfx from private key got from GP Webpay and self created public crt certificate:
+`openssl pkcs12 -export -out PFX_KEY.pfx -inkey PRIVATE_KEY_FROM_GP.key -in GENERATED_CERT_FROM_PRIVATE_KEY.crt`
+1. Create pem certificate from GP public cer certificate needed by .NET Core:
+`openssl x509 -inform der -in GPE_PUBLIC_SIGNING_CERTIFICATE.cer -out GPE_PUBLIC_SIGNING_CERTIFICATE.pem`
+
+So in the library use generated *PFX_KEY.pfx* key as a **private** key (with proper password) and *GPE_PUBLIC_SIGNING_CERTIFICATE.pem* as a public key (no password needed)
 
 
 ### Usage Samples
