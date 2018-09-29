@@ -1,4 +1,7 @@
+<img src="logo.png" align="left" style="width:128px; margin-right: 20px;" />
+
 # GPWebpayNet
+
 
 GPWebpayNet is a helper library for communication with [GP webpay](http://www.gpwebpay.com) payment gateway and providing payments
 via HTTP. 
