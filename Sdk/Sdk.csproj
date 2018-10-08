@@ -14,13 +14,17 @@
     <RepositoryUrl>https://github.com/marazt/gpwebpay-net</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>payment; gateway, payment gateway; sdk; gpwebpay;</PackageTags>
-    <PackageReleaseNotes>Extension of the IEncodingService and IClientService to support certificate instance too (Not only certificate path and its password).</PackageReleaseNotes>
-    <Version>1.3.0</Version>
+    <PackageReleaseNotes>Update of the PaymentRequest.Amount type from decimal to int.</PackageReleaseNotes>
+    <Version>1.3.1</Version>
+    <AssemblyVersion>1.3.1.0</AssemblyVersion>
+    <FileVersion>1.3.1.0</FileVersion>
+    <!-- Optional: Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element) -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
   </PropertyGroup>
   <!-- common NuGet package refs that affect all projects -->
   <!--https://weblog.west-wind.com/posts/2017/Jun/22/MultiTargeting-and-Porting-a-NET-Library-to-NET-Core-20-->
   <ItemGroup>
-    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.0-preview1-25914-04" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.0" />
     <PackageReference Include="System.Xml.XmlDocument" Version="4.3.0" />
   </ItemGroup>
   <!-- .NET Standard 1.6 references, compilation flags and build options -->
@@ -42,4 +46,21 @@
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="2.0.0" />
   </ItemGroup>
+  <ItemGroup>
+    <!-- For GitHub -->
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="All"/>
+
+    <!-- For Visual Studio Team Services -->
+    <!-- <PackageReference Include="Microsoft.SourceLink.Vsts.Git" Version="1.0.0-beta-63127-02" PrivateAssets="All"/> -->
+
+    <!-- For Team Foundation Server -->
+    <!-- <PackageReference Include="Microsoft.SourceLink.Tfs.Git" Version="1.0.0-beta-63127-02" PrivateAssets="All"/> -->
+    <!-- <SourceLinkTfsGitHost Include="tfs-server-name" VirtualDirectory="tfs"/> -->
+
+    <!-- For GitLab -->
+    <!-- <PackageReference Include="Microsoft.SourceLink.GitLab" Version="1.0.0-beta-63127-02" PrivateAssets="All"/> -->
+
+    <!-- For BitBucket -->
+    <!-- <PackageReference Include="Microsoft.SourceLink.Bitbucket.Git" Version="1.0.0-beta-63127-02" PrivateAssets="All"/> -->
+</ItemGroup>
 </Project>

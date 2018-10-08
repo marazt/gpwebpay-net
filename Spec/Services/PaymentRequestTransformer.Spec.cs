@@ -20,7 +20,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
             {
                 MerchantNumber = "MerchantNumber",
                 OrderNumber = 2412,
-                Amount = new decimal(64.6546),
+                Amount = 65460,
                 Currency = CurrencyCodeEnum.Eur,
                 DepositFlag = 1,
                 MerOrderNumber = "MerOrderNumber",
@@ -41,7 +41,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
             var testee = new PaymentRequestTransformer();
             
             const string expected =
-                "[MERCHANTNUMBER, MerchantNumber]|[OPERATION, CREATE_ORDER]|[ORDERNUMBER, 2412]|[AMOUNT, 64.6546]|[CURRENCY, 978]|[DEPOSITFLAG, 1]|[MERORDERNUM, MerOrderNumber]|[URL, https://www.example.org]|[DESCRIPTION, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. ]|[MD, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. ]|[PAYMETHOD, Mps]|[DISABLEPAYMETHOD, Crd]|[PAYMETHODS, Mcm,NotSet]|[EMAIL, user@example.org]|[REFERENCENUMBER, ReferenceNumber]|[ADDINFO, <Info />]";
+                "[MERCHANTNUMBER, MerchantNumber]|[OPERATION, CREATE_ORDER]|[ORDERNUMBER, 2412]|[AMOUNT, 65460]|[CURRENCY, 978]|[DEPOSITFLAG, 1]|[MERORDERNUM, MerOrderNumber]|[URL, https://www.example.org]|[DESCRIPTION, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. ]|[MD, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. ]|[PAYMETHOD, Mps]|[DISABLEPAYMETHOD, Crd]|[PAYMETHODS, Mcm,NotSet]|[EMAIL, user@example.org]|[REFERENCENUMBER, ReferenceNumber]|[ADDINFO, <Info />]";
 
 
             // Act
@@ -62,7 +62,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
             {
                 MerchantNumber = "MerchantNumber",
                 OrderNumber = 2412,
-                Amount = new decimal(64.6546),
+                Amount = 65460,
                 Currency = CurrencyCodeEnum.Eur,
                 DepositFlag = 1,
                 Url = "https://www.example.org",
@@ -72,7 +72,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
             var testee = new PaymentRequestTransformer();
             
             const string expected =
-                "[MERCHANTNUMBER, MerchantNumber]|[OPERATION, CREATE_ORDER]|[ORDERNUMBER, 2412]|[AMOUNT, 64.6546]|[CURRENCY, 978]|[DEPOSITFLAG, 1]|[URL, https://www.example.org]";
+                "[MERCHANTNUMBER, MerchantNumber]|[OPERATION, CREATE_ORDER]|[ORDERNUMBER, 2412]|[AMOUNT, 65460]|[CURRENCY, 978]|[DEPOSITFLAG, 1]|[URL, https://www.example.org]";
 
             // Act            
             var result = testee.GetParametersForDigestCalculation(request);

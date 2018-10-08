@@ -44,7 +44,7 @@ namespace GPWebpayNet.Example
             {
                 MerchantNumber = "235235",
                 OrderNumber = 2412,
-                Amount = new decimal(64.6546),
+                Amount = 65460,
                 Currency = CurrencyCodeEnum.Eur,
                 DepositFlag = 1,
                 MerOrderNumber = "MerOrderNumber",
@@ -95,7 +95,7 @@ namespace GPWebpayNet.Example
             {
                 MerchantNumber = "235235",
                 OrderNumber = 2412,
-                Amount = new decimal(64.6546),
+                Amount = 65460,
                 Currency = CurrencyCodeEnum.Eur,
                 DepositFlag = 1,
                 MerOrderNumber = "MerOrderNumber",

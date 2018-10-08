@@ -24,12 +24,13 @@ namespace GPWebpayNet.Sdk.Models
         /// </value>
         public int OrderNumber { get; set; }
         /// <summary>
-        /// Gets or sets the amount.
+        /// Gets or sets the amount. 
+        /// The amount is in cents or halere, i.e. €1.59 is 159.
         /// </summary>
         /// <value>
         /// The amount.
         /// </value>
-        public decimal Amount { get; set; }
+        public int Amount { get; set; }
         /// <summary>
         /// Gets or sets the currency.
         /// </summary>

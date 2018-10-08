@@ -32,7 +32,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
             {
                 MerchantNumber = "MerchantNumber",
                 OrderNumber = 2412,
-                Amount = new decimal(64.6546),
+                Amount = 65460,
                 Currency = CurrencyCodeEnum.Eur,
                 DepositFlag = 1,
                 MerOrderNumber = "MerOrderNumber",
@@ -54,7 +54,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
                 new PaymentRequestTransformer(), new PaymentResponseTransformer(), clientServiceLoggerMock.Object);
 
             const string expected =
-                "https://example.org?MERCHANTNUMBER=MerchantNumber&OPERATION=CREATE_ORDER&ORDERNUMBER=2412&AMOUNT=64.6546&CURRENCY=978&DEPOSITFLAG=1&MERORDERNUM=MerOrderNumber&URL=https%3A%2F%2Fwww.example.org&DESCRIPTION=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetuer%20adipiscing%20elit.&MD=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetuer%20adipiscing%20elit.&PAYMETHOD=Mps&DISABLEPAYMETHOD=Crd&PAYMETHODS=Mcm%2CNotSet&EMAIL=user%40example.org&REFERENCENUMBER=ReferenceNumber&DIGEST=fFEV3U6BGeahJ8PppXRVHjDN1dRoVERvLhFeB%2FQm%2Ff6T5FFYCAu4aRUoitW%2Buw5VMLLOoJN%2FW3mwEDvquU7S4gf8iYn%2B%2FxAq8e1VEEbM6OOdGPOOYmAV%2Bbrv7DYZRUN3IX7d0QbrmJ3NnJ4j8IYj1ueD6V%2FOA0SpOAMbdIRAMskUh7STjKJvx34pe3RFNuwArl9xQDdD2gVJ8oaHTTUkphqtL6sSb0q6uDSxNR3v9h3v0L4lU7huGpLwplz2yMOnMe1RzhGrDxBEY9L5XvcgP9gpg0UTym%2FRp%2BHO1LAR404cA40N3chwBbDZfcEqnVE6%2B0dvitAyyxAtraSuk%2FN%2BHA%3D%3D";
+                "https://example.org?MERCHANTNUMBER=MerchantNumber&OPERATION=CREATE_ORDER&ORDERNUMBER=2412&AMOUNT=65460&CURRENCY=978&DEPOSITFLAG=1&MERORDERNUM=MerOrderNumber&URL=https%3A%2F%2Fwww.example.org&DESCRIPTION=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetuer%20adipiscing%20elit.&MD=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetuer%20adipiscing%20elit.&PAYMETHOD=Mps&DISABLEPAYMETHOD=Crd&PAYMETHODS=Mcm%2CNotSet&EMAIL=user%40example.org&REFERENCENUMBER=ReferenceNumber&DIGEST=M%2F4LuFpMKYgfmTGtK5W9gepEFBnnJ6jPCsafnXeP0KY58oShqxpg0A6G%2FHK%2BWMzlqSz8hQRL%2FWrmDfkydCcuO7IFlsydmkcn6GNygEXOFepoHfqC1oMTF%2F7w8oaTBJz%2Frt%2FVKX%2Fe%2Fe2wnumK4NsLbLGAtuXKM2ldGQLYJsLdqmPaiguqNcgwCt0WxTlaSyxmheijwW%2B2k%2FeltyP4E4ce4OMr7FUy5Pb3llWDbEnAzUIhgiATFA%2BrbxS0KL5ZAkdJ6HfDRWPSYmHUBLjyLkyJYmmRMMOc3P%2FioYApwFr3mUQayY9BUG%2BikilFYxZEJKqjqAS%2BqvB50n5PA78mpFlaMA%3D%3D";
 
             // Act
             var result = testee.GenerateGPWebPayRedirectUrl(url, request, privateCertificateFile,
@@ -84,7 +84,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
             {
                 MerchantNumber = "MerchantNumber",
                 OrderNumber = 2412,
-                Amount = new decimal(64.6546),
+                Amount = 65460,
                 Currency = CurrencyCodeEnum.Eur,
                 DepositFlag = 1,
                 MerOrderNumber = "MerOrderNumber",
@@ -106,7 +106,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
                 new PaymentRequestTransformer(), new PaymentResponseTransformer(), clientServiceLoggerMock.Object);
 
             const string expected =
-                "https://example.org?MERCHANTNUMBER=MerchantNumber&OPERATION=CREATE_ORDER&ORDERNUMBER=2412&AMOUNT=64.6546&CURRENCY=978&DEPOSITFLAG=1&MERORDERNUM=MerOrderNumber&URL=https%3A%2F%2Fwww.example.org&DESCRIPTION=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetuer%20adipiscing%20elit.&MD=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetuer%20adipiscing%20elit.&PAYMETHOD=Mps&DISABLEPAYMETHOD=Crd&PAYMETHODS=Mcm%2CNotSet&EMAIL=user%40example.org&REFERENCENUMBER=ReferenceNumber&DIGEST=fFEV3U6BGeahJ8PppXRVHjDN1dRoVERvLhFeB%2FQm%2Ff6T5FFYCAu4aRUoitW%2Buw5VMLLOoJN%2FW3mwEDvquU7S4gf8iYn%2B%2FxAq8e1VEEbM6OOdGPOOYmAV%2Bbrv7DYZRUN3IX7d0QbrmJ3NnJ4j8IYj1ueD6V%2FOA0SpOAMbdIRAMskUh7STjKJvx34pe3RFNuwArl9xQDdD2gVJ8oaHTTUkphqtL6sSb0q6uDSxNR3v9h3v0L4lU7huGpLwplz2yMOnMe1RzhGrDxBEY9L5XvcgP9gpg0UTym%2FRp%2BHO1LAR404cA40N3chwBbDZfcEqnVE6%2B0dvitAyyxAtraSuk%2FN%2BHA%3D%3D";
+                "https://example.org?MERCHANTNUMBER=MerchantNumber&OPERATION=CREATE_ORDER&ORDERNUMBER=2412&AMOUNT=65460&CURRENCY=978&DEPOSITFLAG=1&MERORDERNUM=MerOrderNumber&URL=https%3A%2F%2Fwww.example.org&DESCRIPTION=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetuer%20adipiscing%20elit.&MD=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetuer%20adipiscing%20elit.&PAYMETHOD=Mps&DISABLEPAYMETHOD=Crd&PAYMETHODS=Mcm%2CNotSet&EMAIL=user%40example.org&REFERENCENUMBER=ReferenceNumber&DIGEST=M%2F4LuFpMKYgfmTGtK5W9gepEFBnnJ6jPCsafnXeP0KY58oShqxpg0A6G%2FHK%2BWMzlqSz8hQRL%2FWrmDfkydCcuO7IFlsydmkcn6GNygEXOFepoHfqC1oMTF%2F7w8oaTBJz%2Frt%2FVKX%2Fe%2Fe2wnumK4NsLbLGAtuXKM2ldGQLYJsLdqmPaiguqNcgwCt0WxTlaSyxmheijwW%2B2k%2FeltyP4E4ce4OMr7FUy5Pb3llWDbEnAzUIhgiATFA%2BrbxS0KL5ZAkdJ6HfDRWPSYmHUBLjyLkyJYmmRMMOc3P%2FioYApwFr3mUQayY9BUG%2BikilFYxZEJKqjqAS%2BqvB50n5PA78mpFlaMA%3D%3D";
 
             // Act
             var result = testee.GenerateGPWebPayRedirectUrl(url, request, privateCert, publicCert);
@@ -129,7 +129,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
             {
                 MerchantNumber = "MerchantNumber",
                 OrderNumber = 2412,
-                Amount = new decimal(64.6546),
+                Amount = 65460,
                 Currency = CurrencyCodeEnum.Eur,
                 DepositFlag = 1,
                 MerOrderNumber = "MerOrderNumber",
@@ -179,7 +179,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
             {
                 MerchantNumber = "MerchantNumber",
                 OrderNumber = 2412,
-                Amount = new decimal(64.6546),
+                Amount = 65460,
                 Currency = CurrencyCodeEnum.Eur,
                 DepositFlag = 1,
                 MerOrderNumber = "MerOrderNumber",
@@ -233,7 +233,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
             {
                 MerchantNumber = "MerchantNumber",
                 OrderNumber = 2412,
-                Amount = new decimal(64.6546),
+                Amount = 65460,
                 Currency = CurrencyCodeEnum.Eur,
                 DepositFlag = 1,
                 MerOrderNumber = "MerOrderNumber",
@@ -293,7 +293,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
             {
                 MerchantNumber = "MerchantNumber",
                 OrderNumber = 2412,
-                Amount = new decimal(64.6546),
+                Amount = 65460,
                 Currency = CurrencyCodeEnum.Eur,
                 DepositFlag = 1,
                 MerOrderNumber = "MerOrderNumber",
@@ -346,7 +346,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
             {
                 MerchantNumber = "MerchantNumber",
                 OrderNumber = 2412,
-                Amount = new decimal(64.6546),
+                Amount = 65460,
                 Currency = CurrencyCodeEnum.Eur,
                 DepositFlag = 1,
                 MerOrderNumber = "MerOrderNumber",
@@ -405,7 +405,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
             {
                 MerchantNumber = "MerchantNumber",
                 OrderNumber = 2412,
-                Amount = new decimal(64.6546),
+                Amount = 65460,
                 Currency = CurrencyCodeEnum.Eur,
                 DepositFlag = 1,
                 MerOrderNumber = "MerOrderNumber",

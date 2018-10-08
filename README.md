@@ -14,12 +14,12 @@ has different assemblies for working with ceritficates.
 
 
 ### Version
-- **Version 1.3.0** - 2018-09-21
+- **Version 1.3.1** - 2018-10-08
 
 
 ### Getting Started/Installing
 ```
-Install-Package GPWebpayNet.Sdk -Version 1.3.0
+Install-Package GPWebpayNet.Sdk -Version 1.3.1
 ```
 
 ### .NET Framework Support
