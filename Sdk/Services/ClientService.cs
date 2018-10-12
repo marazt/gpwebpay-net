@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Threading.Tasks;
 using GPWebpayNet.Sdk.Exceptions;
 using GPWebpayNet.Sdk.Models;
@@ -324,8 +325,11 @@ namespace GPWebpayNet.Sdk.Services
 
             if (paymentResponse.PRCode != 0 || paymentResponse.SRCode != 0)
             {
-                this.logger.LogError("Bad response");
-                throw new PaymentResponseException(paymentResponse.PRCode, paymentResponse.SRCode, "Bad response",
+                var errorMessage = new StringBuilder("Bad request:\n");
+                errorMessage.AppendLine($"PR {paymentResponse.PRCode}: {ErrorCodesValues.GetPRCode(paymentResponse.PRCode)}");
+                errorMessage.AppendLine($"SR {paymentResponse.SRCode}: {ErrorCodesValues.GetSRCode(paymentResponse.PRCode, paymentResponse.SRCode)}");
+                this.logger.LogError(errorMessage.ToString());
+                throw new PaymentResponseException(paymentResponse.PRCode, paymentResponse.SRCode, errorMessage.ToString(),
                     null);
             }
         }

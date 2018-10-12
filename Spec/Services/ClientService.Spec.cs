@@ -830,7 +830,9 @@ namespace GPWebpayNet.Sdk.Spec.Services
             Action action = () => testee.ProcessGPWebPayResponse(response, merchantNumber, publicCert);
             action
                 .Should().Throw<PaymentResponseException>()
-                .WithMessage("Bad response");
+                .WithMessage(@"Bad request:
+PR 1: Field too long.
+SR 0: ");
         }
 
         [Fact]
@@ -888,8 +890,8 @@ namespace GPWebpayNet.Sdk.Spec.Services
                 Operation = "Operation",
                 OrderNumber = 12332,
                 MerOrderNumber = 0,
-                PRCode = 0,
-                SRCode = 3,
+                PRCode = 28,
+                SRCode = 3006,
                 ResultText = "ResultText",
                 UserParam1 = "UserParam1",
                 AddInfo = null,
@@ -908,7 +910,9 @@ namespace GPWebpayNet.Sdk.Spec.Services
             Action action = () => testee.ProcessGPWebPayResponse(response, merchantNumber, publicCert);
             action
                 .Should().Throw<PaymentResponseException>()
-                .WithMessage("Bad response");
+                .WithMessage(@"Bad request:
+PR 28: Declined in 3D.
+SR 3006: Declined in 3D. Technical problem during Cardholder authentication.");
         }
 
         private Mock<IEncodingService> GetEncodingServiceMock(string digest, bool validationResult)
