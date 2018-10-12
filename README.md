@@ -19,7 +19,7 @@ has different assemblies for working with ceritficates.
 
 ### Getting Started/Installing
 ```
-Install-Package GPWebpayNet.Sdk -Version 1.3.1
+Install-Package GPWebpayNet.Sdk -Version 1.3.2
 ```
 
 ### .NET Framework Support
