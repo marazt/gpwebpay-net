@@ -7,19 +7,20 @@
     <RootNamespace>GPWebpayNet.Sdk</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Description>GPWebpayNet is a helper library for communication with GP webpay(www.gpwebpay.com) payment gateway via HTTP.</Description>
+    <Description>GPWebpayNet is a helper library for communication with GP webpay(www.gpwebpay.com) payment gateway via HTTP(S).</Description>
     <Copyright>© 2017-2018 Marek Polak</Copyright>
     <PackageProjectUrl>https://github.com/marazt/gpwebpay-net</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/marazt/gpwebpay-net/blob/master/LICENSE</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/marazt/gpwebpay-net</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>payment; gateway, payment gateway; sdk; gpwebpay;</PackageTags>
-    <PackageReleaseNotes>Update of the PaymentRequest.Amount type from decimal to int.</PackageReleaseNotes>
-    <Version>1.3.1</Version>
-    <AssemblyVersion>1.3.1.0</AssemblyVersion>
-    <FileVersion>1.3.1.0</FileVersion>
+    <PackageReleaseNotes>Added validation for input parameters DESCRIPTION and MD.</PackageReleaseNotes>
+    <Version>1.3.2</Version>
+    <AssemblyVersion>1.3.2.0</AssemblyVersion>
+    <FileVersion>1.3.2.0</FileVersion>
     <!-- Optional: Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element) -->
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <PackageIconUrl>https://github.com/marazt/gpwebpay-net/blob/master/logo.png</PackageIconUrl>
   </PropertyGroup>
   <!-- common NuGet package refs that affect all projects -->
   <!--https://weblog.west-wind.com/posts/2017/Jun/22/MultiTargeting-and-Porting-a-NET-Library-to-NET-Core-20-->
@@ -48,7 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <!-- For GitHub -->
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="All"/>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="All" />
 
     <!-- For Visual Studio Team Services -->
     <!-- <PackageReference Include="Microsoft.SourceLink.Vsts.Git" Version="1.0.0-beta-63127-02" PrivateAssets="All"/> -->

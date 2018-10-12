@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using GPWebpayNet.Sdk.Enums;
+using GPWebpayNet.Sdk.Exceptions;
 using GPWebpayNet.Sdk.Models;
 
 namespace GPWebpayNet.Sdk.Services
@@ -14,9 +14,6 @@ namespace GPWebpayNet.Sdk.Services
     public class PaymentRequestTransformer : IPaymentRequestTransformer
     {
         private const int MaxLength = 255;
-
-        private static int GetLength(int len) => Math.Min(len, MaxLength);
-
 
         /// <summary>
         /// Gets the parameters for digest calculation.
@@ -47,16 +44,12 @@ namespace GPWebpayNet.Sdk.Services
 
             if (paymentRequest.Description != null)
             {
-                var inAscii = paymentRequest.Description.GetInASCII();
-                parameters.Add(new KeyValuePair<string, string>("DESCRIPTION",
-                    inAscii.Substring(0, GetLength(inAscii.Length))));
+                parameters.Add(new KeyValuePair<string, string>("DESCRIPTION", TransformToAscii(paymentRequest.Description, "DESCRIPTION")));
             }
 
             if (paymentRequest.MD != null)
             {
-                var inAscii = paymentRequest.MD.GetInASCII();
-                parameters.Add(new KeyValuePair<string, string>("MD",
-                    inAscii.Substring(0, GetLength(inAscii.Length))));
+                parameters.Add(new KeyValuePair<string, string>("MD", TransformToAscii(paymentRequest.MD, "MD")));
             }
 
             if (paymentRequest.PaymentMethod != PaymentMethodEnum.NotSet)
@@ -93,6 +86,16 @@ namespace GPWebpayNet.Sdk.Services
             }
 
             return parameters;
+        }
+
+        private static string TransformToAscii (string data, string parameterName)
+        {
+            var asciiData = data.Trim().GetInASCII();
+            if (System.Text.Encoding.ASCII.GetByteCount(asciiData) > MaxLength)
+            {
+                throw new InvalidPaymentRequestDataException($"The value of parameter {parameterName} must be at most {MaxLength} bytes.", null);
+            }
+            return asciiData;
         }
     }
 }
