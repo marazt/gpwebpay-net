@@ -791,7 +791,9 @@ namespace GPWebpayNet.Sdk.Spec.Services
                     publicCertificatePassword);
             action
                 .Should().Throw<PaymentResponseException>()
-                .WithMessage("Bad response");
+                .WithMessage(@"Bad request:
+PR 1: Field too long.
+SR 0: ");
         }
 
         [Fact]
@@ -871,7 +873,9 @@ SR 0: ");
                     publicCertificatePassword);
             action
                 .Should().Throw<PaymentResponseException>()
-                .WithMessage("Bad response");
+                .WithMessage(@"Bad request:
+PR 0: OK
+SR 3: Unknown value for PR code 0 and SR code 3.");
         }
 
         [Fact]
