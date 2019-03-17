@@ -7,7 +7,7 @@ namespace GPWebpayNet.Sdk
     /// </summary>
     public static class ErrorCodesValues
     {
-        private static readonly IReadOnlyDictionary<int, string> PRCodes = new Dictionary<int, string>()
+        private static readonly IReadOnlyDictionary<uint, string> PRCodes = new Dictionary<uint, string>()
         {
             {0, "OK" },
             {1, "Field too long." },
@@ -33,7 +33,7 @@ namespace GPWebpayNet.Sdk
             {1000, "Technical problem." },
         };
 
-        private static readonly IReadOnlyDictionary<int, string> SRCodes1_5_15_20 = new Dictionary<int, string>()
+        private static readonly IReadOnlyDictionary<uint, string> SRCodes1_5_15_20 = new Dictionary<uint, string>()
         {
             {0, string.Empty },
             {1, "ORDERNUMBER" },
@@ -52,7 +52,7 @@ namespace GPWebpayNet.Sdk
             {34, "DIGEST" },
         };
 
-        private static readonly IReadOnlyDictionary<int, string> SRCodes28 = new Dictionary<int, string>()
+        private static readonly IReadOnlyDictionary<uint, string> SRCodes28 = new Dictionary<uint, string>()
         {
             {0, string.Empty },
             {3000, "Declined in 3D. Cardholder not authenticated in 3D." },
@@ -65,7 +65,7 @@ namespace GPWebpayNet.Sdk
             {3008, "Declined in 3D. Unsupported card product." },
         };
 
-        private static readonly IReadOnlyDictionary<int, string> SRCodes30 = new Dictionary<int, string>()
+        private static readonly IReadOnlyDictionary<uint, string> SRCodes30 = new Dictionary<uint, string>()
         {
             {0, string.Empty },
             {1001, "Declined in AC, Card blocked." },
@@ -80,7 +80,7 @@ namespace GPWebpayNet.Sdk
         /// </summary>
         /// <param name="prCode">id of the PR code</param>
         /// <returns>PR code value</returns>
-        public static string GetPRCode(int prCode)
+        public static string GetPRCode(uint prCode)
         {
             if (PRCodes.TryGetValue(prCode, out string value))
             {
@@ -96,9 +96,9 @@ namespace GPWebpayNet.Sdk
         /// <param name="prCode">id of the PR code</param>
         /// <param name="srCode">id of the PR code</param>
         /// <returns>SR code value</returns>
-        public static string GetSRCode(int prCode, int srCode)
+        public static string GetSRCode(uint prCode, uint srCode)
         {
-            IReadOnlyDictionary<int, string> srCodes;
+            IReadOnlyDictionary<uint, string> srCodes;
 
             switch (prCode)
             {
@@ -118,7 +118,7 @@ namespace GPWebpayNet.Sdk
                     srCodes = SRCodes30;
                     break;
                 default:
-                    srCodes = new Dictionary<int, string>();
+                    srCodes = new Dictionary<uint, string>();
                     break;
             }
 

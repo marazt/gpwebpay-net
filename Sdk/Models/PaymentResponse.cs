@@ -21,28 +21,28 @@ namespace GPWebpayNet.Sdk.Models
         /// <value>
         /// The order number.
         /// </value>
-        public int OrderNumber { get; set; }
+        public ulong OrderNumber { get; set; }
         /// <summary>
         /// Gets or sets the mer order number.
         /// </summary>
         /// <value>
         /// The mer order number.
         /// </value>
-        public int MerOrderNumber { get; set; }
+        public uint MerOrderNumber { get; set; }
         /// <summary>
         /// Gets or sets the pr code.
         /// </summary>
         /// <value>
         /// The pr code.
         /// </value>
-        public int PRCode { get; set; }
+        public uint PRCode { get; set; }
         /// <summary>
         /// Gets or sets the sr code.
         /// </summary>
         /// <value>
         /// The sr code.
         /// </value>
-        public int SRCode { get; set; }
+        public uint SRCode { get; set; }
         /// <summary>
         /// Gets or sets the result text.
         /// </summary>

@@ -11,7 +11,7 @@ namespace GPWebpayNet.Sdk.Services
     public class PaymentResponseTransformer : IPaymentResponseTransformer
     {
         /// <summary>
-        /// Gets the payment response instace from query arguments.
+        /// Gets the payment response instance from query arguments.
         /// </summary>
         /// <param name="queryArgs">The query arguments.</param>
         /// <returns>
@@ -32,10 +32,10 @@ namespace GPWebpayNet.Sdk.Services
             return new PaymentResponse
             {
                 Operation = queryArgs["OPERATION"],
-                OrderNumber = int.Parse(queryArgs["ORDERNUMBER"]),
-                MerOrderNumber = queryArgs.ContainsKey("MERORDERNUM") ? int.Parse(queryArgs["MERORDERNUM"]) : 0,
-                PRCode = int.Parse(queryArgs["PRCODE"]),
-                SRCode = int.Parse(queryArgs["SRCODE"]),
+                OrderNumber = ulong.Parse(queryArgs["ORDERNUMBER"]),
+                MerOrderNumber = queryArgs.ContainsKey("MERORDERNUM") ? uint.Parse(queryArgs["MERORDERNUM"]) : 0,
+                PRCode = uint.Parse(queryArgs["PRCODE"]),
+                SRCode = uint.Parse(queryArgs["SRCODE"]),
                 ResultText = queryArgs["RESULTTEXT"],
                 UserParam1 = queryArgs["USERPARAM1"],
                 AddInfo = addInfo,

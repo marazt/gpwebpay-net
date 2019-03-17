@@ -24,26 +24,26 @@ namespace GPWebpayNet.Sdk.Services
         };
 
         private readonly IEncodingService encodingService;
-        private readonly IPaymentRequestTransformer paymnetRequestTransformer;
-        private readonly IPaymentResponseTransformer paymnetResponseTransformer;
+        private readonly IPaymentRequestTransformer paymentRequestTransformer;
+        private readonly IPaymentResponseTransformer paymentResponseTransformer;
         private readonly ILogger logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ClientService"/> class.
         /// </summary>
         /// <param name="encodingService">The encoding service.</param>
-        /// <param name="paymnetRequestTransformer">The paymnet request transformer.</param>
-        /// <param name="paymnetResponseTransformer">The paymnet response transformer.</param>
+        /// <param name="paymentRequestTransformer">The payment request transformer.</param>
+        /// <param name="paymentResponseTransformer">The payment response transformer.</param>
         /// <param name="logger">The logger.</param>
         public ClientService(
             IEncodingService encodingService,
-            IPaymentRequestTransformer paymnetRequestTransformer,
-            IPaymentResponseTransformer paymnetResponseTransformer,
+            IPaymentRequestTransformer paymentRequestTransformer,
+            IPaymentResponseTransformer paymentResponseTransformer,
             ILogger<ClientService> logger)
         {
             this.encodingService = encodingService;
-            this.paymnetRequestTransformer = paymnetRequestTransformer;
-            this.paymnetResponseTransformer = paymnetResponseTransformer;
+            this.paymentRequestTransformer = paymentRequestTransformer;
+            this.paymentResponseTransformer = paymentResponseTransformer;
             this.logger = logger;
         }
 
@@ -76,7 +76,7 @@ namespace GPWebpayNet.Sdk.Services
             X509KeyStorageFlags keyStorageFlags = Encoding.DefaultKeyStorageFlags)
 
         {
-            var parameters = this.paymnetRequestTransformer.GetParametersForDigestCalculation(paymentRequest);
+            var parameters = this.paymentRequestTransformer.GetParametersForDigestCalculation(paymentRequest);
             var message = ClientService.GetMessage(parameters);
             var digest = this.encodingService.SignData(message, privateCert, privateCertPassword, encoding, keyStorageFlags);
             var isValid = this.encodingService.ValidateDigest(digest, message, publicCert, publicCertPassword);
@@ -122,7 +122,7 @@ namespace GPWebpayNet.Sdk.Services
             X509Certificate2 privateCert,
             X509Certificate2 publicCert)
         {
-            var parameters = this.paymnetRequestTransformer.GetParametersForDigestCalculation(paymentRequest);
+            var parameters = this.paymentRequestTransformer.GetParametersForDigestCalculation(paymentRequest);
             var message = ClientService.GetMessage(parameters);
             var digest = this.encodingService.SignData(message, privateCert);
             var isValid = this.encodingService.ValidateDigest(digest, message, publicCert);
@@ -176,7 +176,7 @@ namespace GPWebpayNet.Sdk.Services
             X509KeyStorageFlags keyStorageFlags = Encoding.DefaultKeyStorageFlags)
 
         {
-            var parameters = this.paymnetRequestTransformer.GetParametersForDigestCalculation(paymentRequest);
+            var parameters = this.paymentRequestTransformer.GetParametersForDigestCalculation(paymentRequest);
             var message = ClientService.GetMessage(parameters);
             var digest = this.encodingService.SignData(message, privateCert, privateCertPassword);
             var isValid = this.encodingService.ValidateDigest(digest, message, publicCert, publicCertPassword, encoding, keyStorageFlags);
@@ -214,7 +214,7 @@ namespace GPWebpayNet.Sdk.Services
             X509Certificate2 privateCert,
             X509Certificate2 publicCert)
         {
-            var parameters = this.paymnetRequestTransformer.GetParametersForDigestCalculation(paymentRequest);
+            var parameters = this.paymentRequestTransformer.GetParametersForDigestCalculation(paymentRequest);
             var message = ClientService.GetMessage(parameters);
             var digest = this.encodingService.SignData(message, privateCert);
             var isValid = this.encodingService.ValidateDigest(digest, message, publicCert);
@@ -257,7 +257,7 @@ namespace GPWebpayNet.Sdk.Services
         )
         {
             var isValid = this.encodingService.ValidateDigest(paymentResponse.Digest,
-                this.paymnetResponseTransformer.GetParameterString(paymentResponse),
+                this.paymentResponseTransformer.GetParameterString(paymentResponse),
                 publicCert,
                 publicCertPassword);
 
@@ -268,7 +268,7 @@ namespace GPWebpayNet.Sdk.Services
             }
 
             isValid = this.encodingService.ValidateDigest(paymentResponse.Digest1,
-                $"{this.paymnetResponseTransformer.GetParameterString(paymentResponse)}|{merchantNumber}",
+                $"{this.paymentResponseTransformer.GetParameterString(paymentResponse)}|{merchantNumber}",
                 publicCert,
                 publicCertPassword);
 
@@ -307,7 +307,7 @@ namespace GPWebpayNet.Sdk.Services
             X509Certificate2 publicCert)
         {
             var isValid = this.encodingService.ValidateDigest(paymentResponse.Digest,
-                this.paymnetResponseTransformer.GetParameterString(paymentResponse),
+                this.paymentResponseTransformer.GetParameterString(paymentResponse),
                 publicCert);
 
             if (!isValid)
@@ -317,7 +317,7 @@ namespace GPWebpayNet.Sdk.Services
             }
 
             isValid = this.encodingService.ValidateDigest(paymentResponse.Digest1,
-                $"{this.paymnetResponseTransformer.GetParameterString(paymentResponse)}|{merchantNumber}",
+                $"{this.paymentResponseTransformer.GetParameterString(paymentResponse)}|{merchantNumber}",
                 publicCert);
 
             if (!isValid)
@@ -354,7 +354,7 @@ namespace GPWebpayNet.Sdk.Services
             string publicCertPassword
         )
         {
-            var paymentResponse = this.paymnetResponseTransformer.GetPaymentResponse(queryArgs);
+            var paymentResponse = this.paymentResponseTransformer.GetPaymentResponse(queryArgs);
             this.ProcessGPWebPayResponse(paymentResponse, merchantNumber, publicCert, publicCertPassword);
             return paymentResponse;
         }
@@ -373,7 +373,7 @@ namespace GPWebpayNet.Sdk.Services
             string merchantNumber,
             X509Certificate2 publicCert)
         {
-            var paymentResponse = this.paymnetResponseTransformer.GetPaymentResponse(queryArgs);
+            var paymentResponse = this.paymentResponseTransformer.GetPaymentResponse(queryArgs);
             this.ProcessGPWebPayResponse(paymentResponse, merchantNumber, publicCert);
             return paymentResponse;
         }
@@ -408,7 +408,7 @@ namespace GPWebpayNet.Sdk.Services
         /// Pretty-prints parameters.
         /// </summary>
         /// <param name="parameters">The parameters.</param>
-        /// <returns>Pretty-printed paramters.</returns>
+        /// <returns>Pretty-printed parameters.</returns>
         private static string PrettyPrintParameters(IEnumerable<KeyValuePair<string, string>> parameters)
         {
             return ClientService.ParametersToString(parameters, Environment.NewLine, ": ");

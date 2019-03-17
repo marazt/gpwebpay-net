@@ -15,7 +15,7 @@ namespace GPWebpayNet.Sdk.Exceptions
         /// <value>
         /// The PRCode.
         /// </value>
-        public int PrCode { get; set; }
+        public uint PrCode { get; set; }
         // ReSharper disable once UnusedAutoPropertyAccessor.Global
         /// <summary>
         /// Gets or sets the SRCode.
@@ -23,7 +23,7 @@ namespace GPWebpayNet.Sdk.Exceptions
         /// <value>
         /// The SRCode.
         /// </value>
-        public int SrCode { get; set; }
+        public uint SrCode { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PaymentResponseException"/> class.
@@ -32,7 +32,7 @@ namespace GPWebpayNet.Sdk.Exceptions
         /// <param name="srCode">The sr code.</param>
         /// <param name="message">The message.</param>
         /// <param name="innerException">The inner exception.</param>
-        public PaymentResponseException(int prCode, int srCode, string message, Exception innerException) : base(
+        public PaymentResponseException(uint prCode, uint srCode, string message, Exception innerException) : base(
             message, innerException)
         {
             this.PrCode = prCode;

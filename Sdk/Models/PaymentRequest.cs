@@ -22,7 +22,7 @@ namespace GPWebpayNet.Sdk.Models
         /// <value>
         /// The order number.
         /// </value>
-        public int OrderNumber { get; set; }
+        public ulong OrderNumber { get; set; }
         /// <summary>
         /// Gets or sets the amount. 
         /// The amount is in cents or halere, i.e. €1.59 is 159.
@@ -30,7 +30,7 @@ namespace GPWebpayNet.Sdk.Models
         /// <value>
         /// The amount.
         /// </value>
-        public int Amount { get; set; }
+        public uint Amount { get; set; }
         /// <summary>
         /// Gets or sets the currency.
         /// </summary>
@@ -44,7 +44,7 @@ namespace GPWebpayNet.Sdk.Models
         /// <value>
         /// The deposit flag.
         /// </value>
-        public int DepositFlag { get; set; }
+        public uint DepositFlag { get; set; }
         /// <summary>
         /// Gets or sets the mer order number.
         /// </summary>
@@ -116,12 +116,12 @@ namespace GPWebpayNet.Sdk.Models
         /// </value>
         public XmlElement AddInfo { get; set; }
         /// <summary>
-        /// Gets or sets the digets.
+        /// Gets or sets the digest.
         /// </summary>
         /// <value>
-        /// The digets.
+        /// The digest.
         /// </value>
-        public string Digets { get; set; }
+        public string Digest { get; set; }
         /// <summary>
         /// Gets or sets the language.
         /// </summary>
