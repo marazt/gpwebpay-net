@@ -14,12 +14,22 @@ has different assemblies for working with ceritficates.
 
 
 ### Version
-- **Version 1.3.3** - 2018-10-18
+- **Version 1.4.0** - 2019-03-16
+
+
+
+### Relese Notes
+
+#### Version 1.4.0
+
+- Fix of the [Issue #2](https://github.com/marazt/gpwebpay-net/issues/2). Set numeric values (OrderNumber, Amount) and constants to unsigned types to have bigger positive range and remove possibility to set negative values that have no sense here.
+
+
 
 
 ### Getting Started/Installing
 ```
-Install-Package GPWebpayNet.Sdk -Version 1.3.3
+Install-Package GPWebpayNet.Sdk -Version 1.4.0
 ```
 
 ### .NET Framework Support
