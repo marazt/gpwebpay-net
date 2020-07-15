@@ -9,31 +9,31 @@ namespace GPWebpayNet.Sdk.Enums
         /// <summary>
         /// The eur
         /// </summary>
-        Eur = 978,
+        EUR = 978,
         /// <summary>
         /// The CZK
         /// </summary>
-        Czk = 203,
+        CZK = 203,
         /// <summary>
         /// The GBP
         /// </summary>
-        Gbp = 826,
+        GBP = 826,
         /// <summary>
         /// The huf
         /// </summary>
-        Huf = 348,
+        HUF = 348,
         /// <summary>
         /// The PLN
         /// </summary>
-        Pln = 985,
+        PLN = 985,
         /// <summary>
         /// The rub
         /// </summary>
-        Rub = 643,
+        RUB = 643,
         /// <summary>
         /// The usd
         /// </summary>
-        Usd = 840,
+        USD = 840,
         AED = 784,
         AFN = 971,
         ALL = 008,
