@@ -176,7 +176,6 @@ namespace GPWebpayNet.Sdk.Enums
         TZS = 834,
         UAH = 980,
         UGX = 800,
-        USD = 840,
         USN = 997,
         UYI = 940,
         UYU = 858,
