@@ -49,7 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <!-- For GitHub -->
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
 
     <!-- For Visual Studio Team Services -->
     <!-- <PackageReference Include="Microsoft.SourceLink.Vsts.Git" Version="1.0.0-beta-63127-02" PrivateAssets="All"/> -->
