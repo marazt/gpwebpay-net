@@ -8,16 +8,16 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Description>GPWebpayNet is a helper library for communication with GP webpay(www.gpwebpay.com) payment gateway via HTTP(S).</Description>
-    <Copyright>© 2017-2018 Marek Polak</Copyright>
+    <Copyright>© 2017-2020 Marek Polak</Copyright>
     <PackageProjectUrl>https://github.com/marazt/gpwebpay-net</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/marazt/gpwebpay-net/blob/master/LICENSE</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/marazt/gpwebpay-net</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>payment; gateway, payment gateway; sdk; gpwebpay;</PackageTags>
     <PackageReleaseNotes>Added error values for PR and SR codes to have better error request reason for better debugging.</PackageReleaseNotes>
-    <Version>1.4.0</Version>
-    <AssemblyVersion>1.4.0.0</AssemblyVersion>
-    <FileVersion>1.4.0.0</FileVersion>
+    <Version>1.4.1</Version>
+    <AssemblyVersion>1.4.1.0</AssemblyVersion>
+    <FileVersion>1.4.1.0</FileVersion>
     <!-- Optional: Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element) -->
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <PackageIconUrl>https://github.com/marazt/gpwebpay-net/blob/master/logo.png</PackageIconUrl>
