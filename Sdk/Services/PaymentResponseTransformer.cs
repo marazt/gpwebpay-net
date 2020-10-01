@@ -34,6 +34,7 @@ namespace GPWebpayNet.Sdk.Services
                 Operation = queryArgs["OPERATION"],
                 OrderNumber = ulong.Parse(queryArgs["ORDERNUMBER"]),
                 MerOrderNumber = queryArgs.ContainsKey("MERORDERNUM") ? uint.Parse(queryArgs["MERORDERNUM"]) : 0,
+                MD = queryArgs["MD"],
                 PRCode = uint.Parse(queryArgs["PRCODE"]),
                 SRCode = uint.Parse(queryArgs["SRCODE"]),
                 ResultText = queryArgs["RESULTTEXT"],
@@ -55,10 +56,11 @@ namespace GPWebpayNet.Sdk.Services
         public string GetParameterString(PaymentResponse paymentResponse)
         {
             var merOrderNumber = paymentResponse.MerOrderNumber == 0 ? string.Empty : $"{paymentResponse.MerOrderNumber}|";
+            var md = paymentResponse.MD == null ? string.Empty : $"{paymentResponse.MD}|";
             var resultText = paymentResponse.ResultText == null ? string.Empty : $"|{paymentResponse.ResultText}";
             var userParam1 = paymentResponse.UserParam1 == null ? string.Empty : $"|{paymentResponse.UserParam1}";
             var addInfo = paymentResponse.AddInfo == null ? string.Empty : $"|{paymentResponse.AddInfo.OuterXml}";
-            return $"{paymentResponse.Operation}|{paymentResponse.OrderNumber}|{merOrderNumber}{paymentResponse.PRCode}|{paymentResponse.SRCode}{resultText}{userParam1}{addInfo}";
+            return $"{paymentResponse.Operation}|{paymentResponse.OrderNumber}|{merOrderNumber}{md}{paymentResponse.PRCode}|{paymentResponse.SRCode}{resultText}{userParam1}{addInfo}";
         }
     }
 }

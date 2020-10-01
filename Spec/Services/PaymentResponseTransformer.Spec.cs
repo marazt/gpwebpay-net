@@ -23,6 +23,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
                 Operation = "Operation",
                 OrderNumber = 34634634,
                 MerOrderNumber = 321,
+                MD = "MD-value",
                 PRCode = 23,
                 SRCode = 1,
                 ResultText = "ResultText",
@@ -33,7 +34,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
             };
 
             var testee = new PaymentResponseTransformer();
-            const string expected = "Operation|34634634|321|23|1|ResultText|ResultText|<Info />";
+            const string expected = "Operation|34634634|321|MD-value|23|1|ResultText|ResultText|<Info />";
 
             // Assert
             var result = testee.GetParameterString(response);
@@ -51,6 +52,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
                 {"OPERATION", new StringValues("Operation")},
                 {"ORDERNUMBER", new StringValues("12332")},
                 {"MERORDERNUM", new StringValues("1321")},
+                {"MD", new StringValues("MD-value")},
                 {"PRCODE", new StringValues("23")},
                 {"SRCODE", new StringValues("12")},
                 {"RESULTTEXT", new StringValues("ResultText")},
@@ -69,6 +71,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
             result.Operation.Should().BeEquivalentTo("Operation");
             result.OrderNumber.Should().Be(12332);
             result.MerOrderNumber.Should().Be(1321);
+            result.MD.Should().Be("MD-value");
             result.PRCode.Should().Be(23);
             result.SRCode.Should().Be(12);
             result.ResultText.Should().BeEquivalentTo("ResultText");
@@ -103,6 +106,7 @@ namespace GPWebpayNet.Sdk.Spec.Services
             result.Operation.Should().BeEquivalentTo("Operation");
             result.OrderNumber.Should().Be(12332);
             result.MerOrderNumber.Should().Be(0);
+            result.MD.Should().Be(null);
             result.PRCode.Should().Be(23);
             result.SRCode.Should().Be(12);
             result.ResultText.Should().BeEquivalentTo("ResultText");

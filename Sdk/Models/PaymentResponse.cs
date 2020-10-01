@@ -30,11 +30,19 @@ namespace GPWebpayNet.Sdk.Models
         /// </value>
         public uint MerOrderNumber { get; set; }
         /// <summary>
+        /// Gets or sets the MD.
+        /// </summary>
+        /// <value>
+        /// The MD.
+        /// </value>
+        public string MD { get; set; }
+        /// <summary>
         /// Gets or sets the pr code.
         /// </summary>
         /// <value>
         /// The pr code.
         /// </value>
+        /// 
         public uint PRCode { get; set; }
         /// <summary>
         /// Gets or sets the sr code.
