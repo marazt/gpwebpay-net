@@ -1,7 +1,7 @@
 <img src="logo.png" align="left" style="width:128px; margin-right: 20px;" />
 
 # GPWebpayNet
-1.4.1
+1.4.2
 
 GPWebpayNet is a helper library for communication with [GP webpay](http://www.gpwebpay.com) payment gateway and providing payments
 via HTTP. 
@@ -14,10 +14,14 @@ has different assemblies for working with ceritficates.
 
 
 ### Version
-- **Version 1.4.1** - 2020-07-06
+- **Version 1.4.2** - 2020-10-01
 
 
 ### Release Notes
+
+#### Version 1.4.2 (2020-10-01)
+
+- Fix of the missing LANG parameter in url.
 
 #### Version 1.4.1 (2020-07-06)
 
@@ -29,7 +33,7 @@ has different assemblies for working with ceritficates.
 
 ### Getting Started/Installing
 ```
-Install-Package GPWebpayNet.Sdk -Version 1.4.1
+Install-Package GPWebpayNet.Sdk -Version 1.4.2
 ```
 
 ### .NET Framework Support
