@@ -84,11 +84,6 @@ namespace GPWebpayNet.Sdk.Services
             {
                 parameters.Add(new KeyValuePair<string, string>("ADDINFO", paymentRequest.AddInfo.OuterXml));
             }
-            
-            if (paymentRequest.Lang != null)
-            {
-                parameters.Add(new KeyValuePair<string, string>("LANG", paymentRequest.Lang));
-            }
 
             return parameters;
         }
